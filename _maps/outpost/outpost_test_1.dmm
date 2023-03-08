@@ -111,6 +111,12 @@
 	},
 /turf/open/floor/plasteel/tech/techmaint,
 /area/outpost/vacant_rooms)
+"au" = (
+/obj/structure/table,
+/obj/item/paper_bin,
+/obj/item/pen,
+/turf/open/floor/plasteel,
+/area/outpost/operations)
 "av" = (
 /obj/effect/turf_decal/corner/transparent/green{
 	dir = 4
@@ -283,7 +289,7 @@
 	dir = 4
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/glass/reinforced,
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "bg" = (
 /obj/effect/turf_decal/industrial/warning{
@@ -1631,7 +1637,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "fc" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 8
@@ -1661,8 +1667,9 @@
 /turf/closed/wall/r_wall,
 /area/outpost/vacant_rooms)
 "fj" = (
-/turf/closed/indestructible/reinforced,
-/area/space)
+/obj/structure/chair/wood,
+/turf/open/floor/carpet,
+/area/outpost/crew/canteen)
 "fk" = (
 /obj/structure/chair/sofa{
 	dir = 4
@@ -1760,7 +1767,7 @@
 	pixel_x = 21
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/glass/reinforced,
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "fD" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
@@ -2385,6 +2392,10 @@
 	},
 /turf/open/floor/plasteel/tech,
 /area/outpost/cargo)
+"hE" = (
+/obj/structure/filingcabinet,
+/turf/open/floor/plasteel,
+/area/outpost/operations)
 "hF" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Equipment Room";
@@ -3767,7 +3778,7 @@
 /obj/structure/fans/tiny,
 /obj/effect/mapping_helpers/airlock/locked,
 /turf/open/floor/plasteel/tech,
-/area/space)
+/area/outpost/operations)
 "lV" = (
 /obj/effect/decal/cleanable/dirt/dust,
 /turf/open/floor/plasteel/stairs{
@@ -3911,7 +3922,7 @@
 	},
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "mt" = (
 /obj/machinery/disposal/bin,
 /obj/structure/disposalpipe/trunk{
@@ -4109,7 +4120,10 @@
 /turf/open/floor/plasteel,
 /area/outpost/operations)
 "mX" = (
-/turf/open/floor/glass/reinforced,
+/obj/structure/chair/wood{
+	dir = 4
+	},
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "na" = (
 /obj/structure/catwalk/over,
@@ -4547,7 +4561,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "oz" = (
 /obj/machinery/door/airlock/maintenance_hatch,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2{
@@ -5176,7 +5190,8 @@
 /area/outpost/hallway/starboard)
 "qz" = (
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/glass/reinforced,
+/obj/structure/table/wood,
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "qA" = (
 /obj/structure/fans/tiny,
@@ -6620,7 +6635,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "uS" = (
 /obj/item/assembly/mousetrap/armed,
 /turf/open/floor/plating,
@@ -7058,14 +7073,17 @@
 	},
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "wh" = (
 /obj/structure/chair/comfy/brown,
 /turf/open/floor/wood,
 /area/outpost/crew/canteen)
 "wi" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/open/floor/glass/reinforced,
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "wj" = (
 /obj/effect/turf_decal/industrial/traffic{
@@ -7761,7 +7779,7 @@
 	},
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "yr" = (
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on/layer4{
 	dir = 1
@@ -8394,7 +8412,7 @@
 	pixel_y = -25;
 	pixel_x = 7;
 	name = "window shutters";
-	id = "otcommand"
+	id = "otcom"
 	},
 /turf/open/floor/carpet,
 /area/outpost/operations)
@@ -9216,6 +9234,10 @@
 	},
 /turf/open/floor/plasteel,
 /area/outpost/hallway/fore)
+"Dd" = (
+/obj/structure/table/wood,
+/turf/open/floor/carpet,
+/area/outpost/crew/canteen)
 "De" = (
 /obj/structure/rack,
 /obj/effect/turf_decal/trimline/opaque/green/line{
@@ -9677,7 +9699,7 @@
 	dir = 1
 	},
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "En" = (
 /obj/machinery/computer/cryopod{
 	dir = 1;
@@ -10134,9 +10156,11 @@
 /turf/open/floor/plasteel,
 /area/outpost/crew/law_office)
 "FM" = (
-/obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt/dust,
-/turf/open/floor/glass/reinforced,
+/obj/structure/chair/wood{
+	dir = 8
+	},
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "FN" = (
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2,
@@ -12547,7 +12571,7 @@
 /obj/machinery/jukebox/disco/indestructible{
 	can_be_unanchored = 1
 	},
-/turf/open/floor/glass/reinforced,
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "Nc" = (
 /obj/structure/rack,
@@ -12926,7 +12950,7 @@
 "Or" = (
 /obj/structure/grille,
 /turf/open/floor/plating/airless,
-/area/space)
+/area/outpost/operations)
 "Os" = (
 /obj/effect/turf_decal/industrial/warning{
 	dir = 6
@@ -13196,7 +13220,9 @@
 /obj/machinery/button/door{
 	dir = 1;
 	pixel_y = -24;
-	pixel_x = 7
+	pixel_x = 7;
+	name = "shutter control";
+	id = "outcouch"
 	},
 /turf/open/floor/carpet,
 /area/outpost/hallway/fore)
@@ -13817,6 +13843,12 @@
 	},
 /turf/open/floor/wood,
 /area/outpost/hallway/fore)
+"Ro" = (
+/obj/structure/chair/wood{
+	dir = 8
+	},
+/turf/open/floor/carpet,
+/area/outpost/crew/canteen)
 "Rp" = (
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4{
 	dir = 4
@@ -14256,7 +14288,7 @@
 	},
 /obj/effect/turf_decal/techfloor/hole/right,
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "Sx" = (
 /obj/machinery/light,
 /turf/open/floor/plating,
@@ -15404,8 +15436,10 @@
 /turf/open/floor/plasteel,
 /area/outpost/operations)
 "VS" = (
-/obj/structure/table/glass,
-/turf/open/floor/glass/reinforced,
+/obj/structure/chair/wood{
+	dir = 1
+	},
+/turf/open/floor/carpet,
 /area/outpost/crew/canteen)
 "VT" = (
 /obj/machinery/atmospherics/components/unary/vent_pump/on/layer2{
@@ -16577,7 +16611,7 @@
 	},
 /obj/effect/turf_decal/box/red,
 /turf/open/floor/plasteel/tech/grid,
-/area/space)
+/area/outpost/operations)
 "ZV" = (
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden/layer2,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4{
@@ -19061,11 +19095,11 @@ mC
 Gt
 mC
 mC
-fj
-fj
-fj
-fj
-fj
+Co
+Co
+Co
+Co
+Co
 mC
 mC
 wn
@@ -19184,11 +19218,11 @@ mC
 Gt
 zv
 zv
-fj
+Co
 ZU
 oy
 we
-fj
+Co
 zv
 zv
 wn
@@ -19307,11 +19341,11 @@ mC
 wn
 mC
 mC
-fj
+Co
 Or
 Em
 Or
-fj
+Co
 mC
 mC
 wn
@@ -19430,11 +19464,11 @@ mC
 wn
 mC
 mC
-fj
+Co
 ZU
 uQ
 we
-fj
+Co
 mC
 mC
 wn
@@ -19553,11 +19587,11 @@ mC
 mC
 mC
 mC
-fj
+Co
 Or
 fb
 Or
-fj
+Co
 mC
 mC
 mC
@@ -19676,11 +19710,11 @@ mC
 wn
 mC
 mC
-fj
+Co
 ZU
 uQ
 we
-fj
+Co
 mC
 mC
 wn
@@ -19799,11 +19833,11 @@ mC
 Gt
 zv
 zv
-fj
+Co
 Or
 Sw
 Or
-fj
+Co
 zv
 zv
 wn
@@ -19922,11 +19956,11 @@ mC
 wn
 mC
 mC
-fj
+Co
 yq
 uQ
 ms
-fj
+Co
 mC
 mC
 wn
@@ -20045,11 +20079,11 @@ mC
 mC
 mC
 mC
-fj
-fj
+Co
+Co
 lS
-fj
-fj
+Co
+Co
 mC
 mC
 mC
@@ -22573,11 +22607,11 @@ EP
 vC
 LC
 AS
-mX
-mX
-mX
 Dg
-gZ
+Dg
+fj
+Dd
+wi
 BN
 KC
 gS
@@ -22696,9 +22730,9 @@ cN
 cS
 Dg
 WV
-qz
-VS
+WV
 mX
+Dg
 gZ
 eP
 IR
@@ -22819,9 +22853,9 @@ Ha
 So
 Dg
 gZ
-mX
+fj
 qz
-qz
+WV
 eP
 Pj
 ET
@@ -22864,7 +22898,7 @@ Zv
 Co
 GQ
 ri
-ri
+au
 ca
 Co
 Co
@@ -22941,10 +22975,10 @@ wh
 IT
 GO
 Dg
-wi
+gZ
 mX
-mX
-wi
+Ro
+gZ
 RU
 ET
 BU
@@ -22990,7 +23024,7 @@ PG
 PG
 lK
 Jo
-vV
+hE
 VR
 Co
 DA
@@ -23064,9 +23098,9 @@ VK
 Ha
 CH
 Dg
-wi
+gZ
+Dd
 VS
-mX
 eP
 vq
 ou
@@ -23113,7 +23147,7 @@ iG
 iG
 lK
 vV
-vV
+iG
 Lu
 Co
 Co
@@ -23187,9 +23221,9 @@ Xt
 SE
 To
 gZ
-wi
+gZ
 Na
-wi
+gZ
 Oj
 Ky
 op
@@ -23235,8 +23269,8 @@ GQ
 ri
 ri
 lK
-vV
-vV
+au
+ri
 VR
 AZ
 Co
@@ -23310,9 +23344,9 @@ cN
 cS
 Dg
 UW
-mX
-VS
-wi
+fj
+Dd
+gZ
 vg
 ou
 en
@@ -23433,9 +23467,9 @@ cN
 cS
 Dg
 gZ
-qz
-qz
-wi
+WV
+FM
+gZ
 oW
 ou
 KT
@@ -23557,8 +23591,8 @@ hQ
 gZ
 Dg
 mX
-qz
-wi
+WV
+gZ
 DP
 ou
 KT
@@ -23678,10 +23712,10 @@ Fe
 ny
 To
 UW
-Dg
-mX
+fj
+Dd
 VS
-FM
+UW
 ag
 ou
 KT
@@ -23802,9 +23836,9 @@ lL
 Dg
 Dg
 WV
-mX
-VS
-qz
+Ro
+Dg
+WV
 RY
 ou
 AT
@@ -23925,7 +23959,7 @@ FH
 Dg
 Xr
 qE
-qz
+WV
 bf
 fC
 hs
