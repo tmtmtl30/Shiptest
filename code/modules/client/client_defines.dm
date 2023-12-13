@@ -168,8 +168,8 @@
 	var/dont_animate_parallax
 	///world.time of last parallax update
 	var/last_parallax_shift
-	///ds between parallax updates
-	var/parallax_throttle = 0
+	///ds between parallax updates // ! remove
+	// var/parallax_throttle = 0
 	var/parallax_movedir = 0
 	var/parallax_layers_max = 4
 	var/parallax_animate_timer

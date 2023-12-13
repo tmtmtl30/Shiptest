@@ -61,9 +61,10 @@
 #define SCALING_METHOD_DISTORT "distort"
 #define SCALING_METHOD_BLUR "blur"
 
-#define PARALLAX_DELAY_DEFAULT world.tick_lag
-#define PARALLAX_DELAY_MED 1
-#define PARALLAX_DELAY_LOW 2
+// ! remove
+// #define PARALLAX_DELAY_DEFAULT world.tick_lag
+// #define PARALLAX_DELAY_MED 1
+// #define PARALLAX_DELAY_LOW 2
 
 #define SEC_DEPT_NONE "None"
 #define SEC_DEPT_RANDOM "Random"

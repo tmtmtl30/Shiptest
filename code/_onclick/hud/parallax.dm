@@ -1,3 +1,8 @@
+// This used to be a clientside pref. It controls the delay in ds between player movement and parallax movement.
+// Keep it low. When it's high, the delay is really noticeable and it makes the smoothing animation jank out.
+// I removed it from prefs because... why is it a pref? It just makes things look worse. It doesn't help client performance.
+#define PARALLAX_THROTTLE world.tick_lag
+
 
 /datum/hud/proc/create_parallax(mob/viewmob)
 	var/mob/screenmob = viewmob || mymob
@@ -24,13 +29,24 @@
 	if(screenmob != mymob)
 		C.screen -= locate(/atom/movable/screen/plane_master/parallax_white) in C.screen
 		C.screen += PM
+	// this matrix used to be:
+	// 0, 0, 0, 0,
+	// 0, 0, 0, 0,
+	// 0, 0, 0, 0,
+	// 1, 1, 1, 1,
+	// 0, 0, 0, 0
+	// this meant that the alpha value was used for each color. this meant that all pixels were fullwhite for the gradient to use...
+	// unless the original sprite had transparency. this resulted in random stray black pixels on the gradient sprite. this was unnecessary;
+	// the FINAL row, which you see set to 1s below, is always multiplied by 255. thus, putting all ones in that row ensures
+	// every pixel is unconditionally #FFFFFF at 255 alpha.
+	// siiiiiiiiiiiiiiiiiiiiigh
 	PM.color = list(
 		0, 0, 0, 0,
 		0, 0, 0, 0,
 		0, 0, 0, 0,
-		1, 1, 1, 1,
-		0, 0, 0, 0
-		)
+		0, 0, 0, 0,
+		1, 1, 1, 1
+	)
 
 
 /datum/hud/proc/remove_parallax(mob/viewmob)
@@ -57,17 +73,18 @@
 			pref = PARALLAX_HIGH
 		switch(C.prefs.parallax)
 			if (PARALLAX_INSANE)
-				C.parallax_throttle = PARALLAX_DELAY_DEFAULT
+				// ! remove
+				// C.parallax_throttle = PARALLAX_DELAY_DEFAULT // ! figure out what this does
 				C.parallax_layers_max = 5
 				return TRUE
 
 			if (PARALLAX_MED)
-				C.parallax_throttle = PARALLAX_DELAY_MED
+				// C.parallax_throttle = PARALLAX_DELAY_MED
 				C.parallax_layers_max = 3
 				return TRUE
 
 			if (PARALLAX_LOW)
-				C.parallax_throttle = PARALLAX_DELAY_LOW
+				// C.parallax_throttle = PARALLAX_DELAY_LOW
 				C.parallax_layers_max = 1
 				return TRUE
 
@@ -75,7 +92,7 @@
 				return FALSE
 
 	//This is high parallax.
-	C.parallax_throttle = PARALLAX_DELAY_DEFAULT
+	// C.parallax_throttle = PARALLAX_DELAY_DEFAULT
 	C.parallax_layers_max = 4
 	return TRUE
 
@@ -177,7 +194,7 @@
 		C.previous_turf = posobj
 		force = TRUE
 
-	if (!force && world.time < C.last_parallax_shift+C.parallax_throttle)
+	if (!force && world.time < C.last_parallax_shift+PARALLAX_THROTTLE)
 		return
 
 	//Doing it this way prevents parallax layers from "jumping" when you change Z-Levels.
@@ -188,13 +205,14 @@
 		return
 
 	var/last_delay = world.time - C.last_parallax_shift
-	last_delay = min(last_delay, C.parallax_throttle)
+	last_delay = min(last_delay, PARALLAX_THROTTLE)
 	C.previous_turf = posobj
 	C.last_parallax_shift = world.time
 
+	var/datum/virtual_level/vlevel = mymob.get_virtual_level()
 	for(var/thing in C.parallax_layers)
 		var/atom/movable/screen/parallax_layer/L = thing
-		L.update_status(mymob)
+		L.update_status(mymob, vlevel)
 		if (L.view_sized != C.view)
 			L.update_o(C.view)
 
@@ -220,7 +238,7 @@
 				L.offset_y += 480
 
 
-		if(!areaobj.parallax_movedir && C.dont_animate_parallax <= world.time && (offset_x || offset_y) && abs(offset_x) <= max(C.parallax_throttle/world.tick_lag+1,1) && abs(offset_y) <= max(C.parallax_throttle/world.tick_lag+1,1) && (round(abs(change_x)) > 1 || round(abs(change_y)) > 1))
+		if(!areaobj.parallax_movedir && C.dont_animate_parallax <= world.time && (offset_x || offset_y) && abs(offset_x) <= max(PARALLAX_THROTTLE/world.tick_lag+1,1) && abs(offset_y) <= max(PARALLAX_THROTTLE/world.tick_lag+1,1) && (round(abs(change_x)) > 1 || round(abs(change_y)) > 1))
 			L.transform = matrix(1, 0, offset_x*L.speed, 0, 1, offset_y*L.speed)
 			animate(L, transform=matrix(), time = last_delay)
 
@@ -239,6 +257,7 @@
 
 /atom/movable/screen/parallax_layer
 	icon = 'icons/effects/parallax.dmi'
+	/// The # of pixels this layer moves for each turf moved by a player.
 	var/speed = 1
 	var/offset_x = 0
 	var/offset_y = 0
@@ -309,5 +328,17 @@
 	layer = 30
 	invisibility = INVISIBILITY_ABSTRACT //currently not used
 
+// ! finish this
+// Overridden, because unlike other parallax types, we don't want this to loop.
 /atom/movable/screen/parallax_layer/planet/update_o()
 	icon_state = "planet"
+
+
+/atom/movable/screen/parallax_layer/dynamic
+	icon_state = "planet"
+
+/atom/movable/screen/parallax_layer/dynamic/update_status(mob/M, datum/virtual_level/vlevel)
+
+
+
+

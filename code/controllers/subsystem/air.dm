@@ -57,7 +57,7 @@ SUBSYSTEM_DEF(air)
 	var/list/currentrun = list()
 	var/currentpart = SSAIR_PIPENETS
 
-	var/map_loading = TRUE
+	var/map_loading = TRUE // ! this is happening wrong
 
 	var/log_explosive_decompression = TRUE // If things get spammy, admemes can turn this off.
 
