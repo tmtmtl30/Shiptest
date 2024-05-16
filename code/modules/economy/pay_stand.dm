@@ -12,6 +12,7 @@
 	var/amount_deposited = 0 //keep track of the amount deposited over time so you can pay multiple times to reach the signaler threshold
 	var/force_fee = 0 //replaces the "pay whatever" functionality with a set amount when non-zero.
 
+#warn lots of behavior here -- spacecash, holochips, purchases
 /obj/machinery/paystand/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/card/id))
 		if(W == my_card)

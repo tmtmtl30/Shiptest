@@ -10,6 +10,7 @@
 		SSeconomy.bank_accounts += src
 	account_holder = newname
 	account_id = rand(111111,999999)
+	log_creation()
 
 /datum/bank_account/Destroy()
 	if(add_to_accounts)
@@ -19,30 +20,105 @@
 	SSeconomy.bank_money -= account_balance
 	return ..()
 
+// Split off into its own proc so that it can be separately called by /datum/bank_account/ship
+/datum/bank_account/proc/log_creation()
+	// starting balance unlogged, as it is assumed to be 0
+	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATED, list(
+		"ACCOUNT_ID" = account_id,
+		"REF" = REF(src),
+		"TYPE" = type,
+		"HOLDER_NAME" = account_holder,
+	))
+	#warn log ship affiliation?
+
+/// Returns whether the account has greater than or equal to the passed amount of credits.
+/datum/bank_account/proc/has_money(amt)
+	return account_balance >= amt
+
+/// Internal account adjustment proc, used by the wrappers.
+/// Do not call directly, as it lacks logging!
 /datum/bank_account/proc/_adjust_money(amt)
+	PRIVATE_PROC(TRUE)
 	account_balance += amt
 	if(account_balance < 0)
 		account_balance = 0
 
-/datum/bank_account/proc/has_money(amt)
-	return account_balance >= amt
-
-/datum/bank_account/proc/adjust_money(amt, reason = "cash")
+#warn rewrite all adjust_money calls to be more descriptive
+/// Public-facing proc for generic account value adjustment.
+/// Before using this, consider if transfer_money(), absorb_cash(), or create_holochip()
+/// fit your use case, as these have more detailed logging.
+/datum/bank_account/proc/adjust_money(amt, source = "cash")
 	if((amt < 0 && has_money(-amt)) || amt > 0)
-		SSblackbox.record_feedback("tally", "credits", amt, reason)
-		SSeconomy.bank_money += amt
 		_adjust_money(amt)
+		SSeconomy.bank_money += amt
+		format_log_econ(ECON_LOG_EVENT_ACCOUNT_UPDATED, list(
+			"REF" = REF(src),
+			"AMOUNT" = amt,
+			"NEW_TOTAL" = account_balance,
+			"SOURCE" = source
+		))
 		return TRUE
 	return FALSE
 
+/// Public-facing wrapper proc for direct balance transfers between bank accounts.
+/// Transfers amount credits from the passed account to this account.
 /datum/bank_account/proc/transfer_money(datum/bank_account/from, amount)
 	if(from.has_money(amount))
-		adjust_money(amount, "transfer")
+		_adjust_money(amount)
+		from._adjust_money(-amount)
+
+		format_log_econ(ECON_LOG_EVENT_ACCOUNT_TRANSFER, list(
+			"AMOUNT" = amount,
+			"TO_REF" = REF(src),
+			"NEW_TOTAL_TO" = src.account_balance
+			"FROM_REF" = REF(from),
+			"NEW_TOTAL_FROM" = from.account_balance
+		))
+
 		SSblackbox.record_feedback("amount", "credits_transferred", amount)
 		log_econ("[amount] credits were transferred from [from.account_holder]'s account to [src.account_holder]")
-		from.adjust_money(-amount, "transfer_out")
+
 		return TRUE
 	return FALSE
+
+/// Wrapper proc for adding the money contained by space cash, a holochip, or another value-containing item to the account.
+/// Will return FALSE if the item does not have an associated value per get_item_credit_value().
+/// Otherwise, returns the number of credits added, and qdeletes the item unless qdel_after is set to FALSE.
+/datum/bank_account/proc/absorb_cash(obj/item/money_item, qdel_after = TRUE)
+	var/item_value = money_item.get_item_credit_value()
+	if(!item_value)
+		return FALSE
+
+	_adjust_money(item_value)
+	format_log_econ(ECON_LOG_EVENT_ACCOUNT_ABSORB, list(
+		"ACCOUNT_REF" = REF(src),
+		"ITEM_REF" = REF(money_item),
+		"ITEM_TYPE" = money_item.type,
+		"AMOUNT" = item_value,
+		"NEW_TOTAL" = account_balance,
+	))
+
+	#warn potentially not great, for obvious reasons (many procs access the item after this one; accessing after qdeletion is kinda icky)
+	if(qdel_after)
+		qdel(money_item)
+	return item_value
+
+/// Using money from this account, creates a holochip at the given location with the specified amount of funds.
+/// If the funds are unavailable or the amount passed is invalid (it's <= 0), nothing is deducted or created and the proc returns FALSE.
+/// Otherwise, the holochip is created, money is deducted from this account, and a reference to the chip is returned.
+/datum/bank_account/proc/create_holochip(location, amount)
+	if(!has_money(amount) || amount <= 0)
+		return FALSE
+	_adjust_money(-amount)
+
+	var/obj/item/holochip/holochip = new(location, amount)
+	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATECHIP, list(
+		"ACCOUNT_REF" = REF(src),
+		"ITEM_REF" = REF(holochip),
+		"AMOUNT" = amount,
+		"NEW_TOTAL" = account_balance
+	))
+	return holochip
 
 /datum/bank_account/proc/bank_card_talk(message, force)
 	if(!message || !bank_cards.len)
@@ -85,4 +161,6 @@
 
 /datum/bank_account/ship/New(newname, budget)
 	account_holder = newname
+	log_creation()
+	// we do this after logging the account's creation, so that events are logged in a nice order
 	adjust_money(budget, "starting_money")

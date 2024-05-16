@@ -65,13 +65,13 @@
 	return ..()
 
 /obj/machinery/computer/cargo/express/attackby(obj/item/W, mob/living/user, params)
-	var/value = W.get_item_credit_value()
-	if(value && charge_account)
-		charge_account.adjust_money(value)
-		to_chat(user, "<span class='notice'>You deposit [W]. The Vessel Budget is now [charge_account.account_balance] cr.</span>")
-		qdel(W)
-		return TRUE
-	else if(istype(W, /obj/item/supplypod_beacon))
+	if(charge_account)
+		var/value = charge_account.absorb_cash(W)
+		if(value)
+			to_chat(user, "<span class='notice'>You deposit [W]. The Vessel Budget is now [charge_account.account_balance] cr.</span>")
+			return TRUE
+
+	if(istype(W, /obj/item/supplypod_beacon))
 		var/obj/item/supplypod_beacon/sb = W
 		if (sb.express_console != src)
 			sb.link_console(src, user)
@@ -172,13 +172,16 @@
 			// no giving yourself money
 			if(!charge_account || !val || val <= 0)
 				return
-			if(charge_account.adjust_money(-val))
-				var/obj/item/holochip/cash_chip = new /obj/item/holochip(drop_location(), val)
-				if(ishuman(usr))
-					var/mob/living/carbon/human/user = usr
-					user.put_in_hands(cash_chip)
-				playsound(src, 'sound/machines/twobeep_high.ogg', 50, TRUE)
-				src.visible_message("<span class='notice'>[src] dispenses a holochip.</span>")
+			var/obj/item/holochip/cash_chip = charge_account.create_holochip(drop_location(), val)
+			if(!cash_chip)
+				return
+
+			playsound(src, 'sound/machines/twobeep_high.ogg', 50, TRUE)
+			src.visible_message("<span class='notice'>[src] dispenses a holochip.</span>")
+			#warn should check adjacency
+			if(ishuman(usr))
+				var/mob/living/carbon/human/user = usr
+				user.put_in_hands(cash_chip)
 			return TRUE
 
 		if("LZCargo")

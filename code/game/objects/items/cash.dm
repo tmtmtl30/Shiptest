@@ -23,6 +23,8 @@
 	update_appearance()
 	SSeconomy.physical_money += value
 
+#warn need to log creation, splitting, etc.
+
 /obj/item/spacecash/proc/adjust_value(amount)
 	value += amount
 	SSeconomy.physical_money += amount

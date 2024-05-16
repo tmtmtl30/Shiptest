@@ -233,6 +233,7 @@
 		ui = new(user, src, "ComputerFabricator")
 		ui.open()
 
+#warn you're kidding meeeeeeeeeeeeeeeeeeeee
 /obj/machinery/lapvend/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/spacecash/bundle))
 		var/obj/item/spacecash/bundle/c = I

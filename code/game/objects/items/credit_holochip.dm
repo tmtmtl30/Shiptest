@@ -110,6 +110,7 @@
 	if(split_amount == null || split_amount <= 0 || !user.canUseTopic(src, BE_CLOSE, ismonkey(user)))
 		return
 	else
+		#warn splitting; check space cash too
 		var/new_credits = spend(split_amount, TRUE)
 		var/obj/item/holochip/H = new(user ? user : drop_location(), new_credits)
 		if(user)

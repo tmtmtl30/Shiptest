@@ -22,6 +22,7 @@
 		if(categories && categories.len)
 			viewing_category = categories[1]
 
+#warn should be logged as a form of spending, also see below for extraction?
 /obj/item/blackmarket_uplink/attackby(obj/item/I, mob/user, params)
 	if(istype(I, /obj/item/holochip) || istype(I, /obj/item/spacecash/bundle) || istype(I, /obj/item/coin))
 		var/worth = I.get_item_credit_value()
