@@ -465,14 +465,14 @@
 			if(prob(30))
 				r_pocket = pickweight(list(
 					/obj/item/stack/marker_beacon = 20,
-					/obj/item/spacecash/bundle/mediumrand = 7,
+					/obj/item/money_stack/cash/mediumrand = 7,
 					/obj/item/reagent_containers/hypospray/medipen/survival = 2,
 					/obj/item/borg/upgrade/modkit/damage = 1
 					)
 				)
 			if(prob(10))
 				l_pocket = pickweight(list(
-					/obj/item/spacecash/bundle/mediumrand = 7,
+					/obj/item/money_stack/cash/mediumrand = 7,
 					/obj/item/reagent_containers/hypospray/medipen/survival = 2,
 					/obj/item/borg/upgrade/modkit/cooldown = 1
 					)
@@ -634,14 +634,14 @@
 			if(prob(30))
 				r_pocket = pickweight(list(
 					/obj/item/stack/marker_beacon = 20,
-					/obj/item/spacecash/bundle/mediumrand = 7,
+					/obj/item/money_stack/cash/mediumrand = 7,
 					/obj/item/reagent_containers/hypospray/medipen/survival = 2,
 					/obj/item/borg/upgrade/modkit/damage = 1
 					)
 				)
 			if(prob(30))
 				l_pocket = pickweight(list(
-					/obj/item/spacecash/bundle/mediumrand = 5,
+					/obj/item/money_stack/cash/mediumrand = 5,
 					/obj/item/reagent_containers/hypospray/medipen/survival = 2,
 					/obj/item/borg/upgrade/modkit/cooldown = 1
 					)

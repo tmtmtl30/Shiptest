@@ -267,7 +267,7 @@
 		else
 			l_pocket = /obj/item/tank/internals/emergency_oxygen/engi
 		if (prob(20))
-			r_pocket = /obj/item/spacecash/bundle/mediumrand
+			r_pocket = /obj/item/money_stack/cash/mediumrand
 		else
 			r_pocket = null
 

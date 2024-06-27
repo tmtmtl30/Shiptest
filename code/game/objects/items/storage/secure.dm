@@ -149,7 +149,7 @@
 	..()
 	var/datum/component/storage/STR = GetComponent(/datum/component/storage)
 	for(var/i = 0, i < STR.max_items - 2, i++)
-		new /obj/item/spacecash/bundle/mediumrand(src)
+		new /obj/item/money_stack/cash/mediumrand(src)
 
 
 // -----------------------------

@@ -110,7 +110,7 @@
 	gloves = null
 	shoes = /obj/item/clothing/shoes/laceup
 
-	backpack_contents = list(/obj/item/clothing/accessory/medal/gold/captain=1, /obj/item/spacecash/bundle/c10000=1)
+	backpack_contents = list(/obj/item/clothing/accessory/medal/gold/captain=1, /obj/item/money_stack/cash/c10000=1)
 
 	backpack = /obj/item/storage/backpack
 	satchel = /obj/item/storage/backpack/satchel/

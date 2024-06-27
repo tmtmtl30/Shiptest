@@ -1,8 +1,8 @@
 /datum/fish_source/ocean
 	fish_table = list(
 		FISHING_DUD = 15,
-		/obj/item/spacecash/bundle/c1 = 10,
-		/obj/item/spacecash/bundle/c5 = 5,
+		/obj/item/money_stack/cash/c1 = 10,
+		/obj/item/money_stack/cash/c5 = 5,
 		/obj/item/clothing/shoes/workboots = 5,
 		/obj/item/fish/clownfish = 15,
 		/obj/item/fish/pufferfish = 15,
@@ -26,8 +26,8 @@
 /datum/fish_source/jungle
 	fish_table = list(
 		FISHING_DUD = 15,
-		/obj/item/spacecash/bundle/c1 = 10,
-		/obj/item/spacecash/bundle/c5 = 5,
+		/obj/item/money_stack/cash/c1 = 10,
+		/obj/item/money_stack/cash/c5 = 5,
 		/obj/item/fish/perch = 20,
 		/obj/item/fish/goldfish = 15,
 		/obj/item/fish/angelfish = 15,

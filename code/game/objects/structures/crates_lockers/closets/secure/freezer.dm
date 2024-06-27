@@ -100,11 +100,11 @@
 /obj/structure/closet/secure_closet/freezer/money/PopulateContents()
 	..()
 	for(var/i = 0, i < 3, i++)
-		new /obj/item/spacecash/bundle/mediumrand(src)
+		new /obj/item/money_stack/cash/mediumrand(src)
 	for(var/i = 0, i < 5, i++)
-		new /obj/item/spacecash/bundle/smallrand(src)
+		new /obj/item/money_stack/cash/smallrand(src)
 	for(var/i = 0, i < 8, i++)
-		new /obj/item/spacecash/bundle/pocketchange(src)
+		new /obj/item/money_stack/cash/pocketchange(src)
 
 /obj/structure/closet/secure_closet/freezer/cream_pie
 	name = "cream pie closet"

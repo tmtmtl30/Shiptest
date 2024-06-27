@@ -233,7 +233,7 @@
 		var/old_tech_largest_bomb_value = linked_techweb.largest_bomb_value //held so we can pull old before we do math
 		linked_techweb.largest_bomb_value = point_gain
 		point_gain -= old_tech_largest_bomb_value
-		new /obj/item/spacecash(get_dumping_location(), point_gain)
+		new /obj/item/money_stack/cash(get_dumping_location(), point_gain)
 		linked_techweb.add_point_type(TECHWEB_POINT_TYPE_DEFAULT, point_gain)
 		say("Explosion details and mixture analyzed and sold to the highest bidder for [point_gain] cr, with a reward of [point_gain] points.")
 

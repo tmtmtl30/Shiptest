@@ -91,9 +91,9 @@
 		U.apply_damage(25, BRUTE, pick(BODY_ZONE_L_ARM, BODY_ZONE_R_ARM))
 		to_chat(user, "<span class='warning'>BLOOD PRICE ACCEPTED. WITHDRAWING KRONOR FROM OFFSHORE FUND...</span>")
 		pick(
-						new /obj/item/spacecash/bundle/mediumrand(user.drop_location()),
-						new /obj/item/spacecash/bundle/smallrand(user.drop_location()),
-						new /obj/item/holochip(user.drop_location(), 5000))
+						new /obj/item/money_stack/cash/mediumrand(user.drop_location()),
+						new /obj/item/money_stack/cash/smallrand(user.drop_location()),
+						new /obj/item/money_stack/holochip(user.drop_location(), 5000))
 	else
 		to_chat(user, "<span class='warning'>[src]'s savings account can't yet be accessed!</span>")
 
