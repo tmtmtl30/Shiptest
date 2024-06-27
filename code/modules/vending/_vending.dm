@@ -54,7 +54,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	integrity_failure = 0.33
 	armor = list("melee" = 20, "bullet" = 0, "laser" = 0, "energy" = 0, "bomb" = 0, "bio" = 0, "rad" = 0, "fire" = 50, "acid" = 70)
 	circuit = /obj/item/circuitboard/machine/vendor
-	var/datum/weakref/payment_account_ref
 	light_power = 0.5
 	light_range = MINIMUM_USEFUL_LIGHT_RANGE
 	clicksound = 'sound/machines/pda_button1.ogg'
@@ -130,10 +129,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 	var/extended_inventory = 0
 	///Are we checking the users ID
 	var/scan_id = 1
-	///Coins that we accept?
-	var/obj/item/coin/coin
-	///Bills we accept?
-	var/obj/item/spacecash/bundle/bill
 	///Does this machine accept mining points?
 	var/mining_point_vendor = FALSE
 	///Default price of items if not overridden
@@ -195,8 +190,6 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 
 /obj/machinery/vending/Destroy()
 	QDEL_NULL(wires)
-	QDEL_NULL(coin)
-	QDEL_NULL(bill)
 	QDEL_NULL(Radio)
 	return ..()
 
@@ -796,12 +789,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 						vend_ready = TRUE
 						return
 
-					var/datum/bank_account/payment_account = payment_account_ref.resolve()
-					if(payment_account)
-						payment_account.transfer_money(account, price_to_use)
-					else
-						account.adjust_money(-price_to_use, "vendor_purchase")
-					SSblackbox.record_feedback("amount", "vending_spent", price_to_use)
+					account.adjust_money(-price_to_use, "vendor_purchase")
 					log_econ("[price_to_use] credits were inserted into [src] by [H] to buy [R].")
 			if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
 				say("Thank you for shopping with [src]!")
@@ -1032,8 +1020,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 						if(owner)
 							owner.transfer_money(account, S.custom_price)
 						else
-							account.adjust_money(-S.custom_price, "vendor_purchase")
-						SSblackbox.record_feedback("amount", "vending_spent", S.custom_price)
+							account.adjust_money(-S.custom_price, "custom_vendor_purchase")
 						log_econ("[S.custom_price] credits were spent on [src] buying a [S] by [owner.account_holder], owned by [private_a.account_holder].")
 						vending_machine_input[N] = max(vending_machine_input[N] - 1, 0)
 						S.forceMove(drop_location())

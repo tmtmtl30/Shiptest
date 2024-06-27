@@ -45,8 +45,7 @@
 		/obj/item/reagent_containers/food/snacks/raisincookie,
 		/obj/item/reagent_containers/food/snacks/pancakes,
 		/obj/item/throwing_star,
-		/obj/item/spacecash,
-		/obj/item/holochip,
+		/obj/item/money_stack,
 		/obj/item/card,
 		/obj/item/folder/biscuit
 	)

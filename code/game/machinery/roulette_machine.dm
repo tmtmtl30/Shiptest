@@ -43,7 +43,7 @@
 	var/playing = FALSE
 	var/locked = FALSE
 	var/drop_dir = SOUTH
-	var/static/list/cash_values = list(/obj/item/spacecash/bundle/c100 = 100, /obj/item/spacecash/bundle/c50 = 50, /obj/item/spacecash/bundle/c10 = 10, /obj/item/spacecash/bundle/c1 = 1) //Make sure this is ordered from left to right.
+	var/static/list/cash_values = list(/obj/item/money_stack/cash/c100 = 100, /obj/item/money_stack/cash/c50 = 50, /obj/item/money_stack/cash/c10 = 10, /obj/item/money_stack/cash/c1 = 1) //Make sure this is ordered from left to right.
 	var/list/bundles_to_dispense = list()
 	var/datum/looping_sound/jackpot/jackpot_loop
 	var/on = TRUE
@@ -185,7 +185,7 @@
 
 	var/payout = potential_payout
 
-	my_card.registered_account.transfer_money(player_id.registered_account, bet_amount)
+	my_card.registered_account.transfer_money(player_id.registered_account, bet_amount, "roulette_spin")
 
 	playing = TRUE
 	update_appearance()
@@ -235,7 +235,7 @@
 
 	var/remaining_payout = payout
 
-	my_card.registered_account.adjust_money(-payout)
+	my_card.registered_account.adjust_money(-payout, "roulette_payout")
 
 	for(var/cash_type in cash_values) //Loop through all bundles from most valuable to least valuable. Try to give as much of that bundle as possible until you can't anymore, then move to the next.
 		var/value = cash_values[cash_type] //Change this to use initial value once we change to the right bundle

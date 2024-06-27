@@ -6,15 +6,3 @@ SUBSYSTEM_DEF(economy)
 
 	///List of normal accounts (not ship accounts)
 	var/list/bank_accounts = list()
-	///Total amount of physical money in the game
-	var/physical_money = 0
-	///Total amount of money in bank accounts
-	var/bank_money = 0
-
-/datum/controller/subsystem/economy/stat_entry(msg)
-	msg += "{"
-	msg += "PH: [physical_money]|"
-	msg += "BN: [bank_money]|"
-	msg += "TOT: [physical_money + bank_money]"
-	msg += "}"
-	return ..()

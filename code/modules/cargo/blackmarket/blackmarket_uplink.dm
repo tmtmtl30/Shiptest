@@ -22,8 +22,9 @@
 		if(categories && categories.len)
 			viewing_category = categories[1]
 
+#warn should be logged as a form of spending, extraction; note also purchases!
 /obj/item/blackmarket_uplink/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/holochip) || istype(I, /obj/item/spacecash/bundle) || istype(I, /obj/item/coin))
+	if(iscash(I))
 		var/worth = I.get_item_credit_value()
 		if(!worth)
 			to_chat(user, "<span class='warning'>[I] doesn't seem to be worth anything!</span>")
@@ -47,7 +48,7 @@
 		to_chat(user, "<span class='warning'>There is only [money] credits in [src]</span>")
 		return
 
-	var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
+	var/obj/item/money_stack/holochip/holochip = new (user.drop_location(), amount_to_remove)
 	money -= amount_to_remove
 	holochip.name = "washed " + holochip.name
 	user.put_in_hands(holochip)

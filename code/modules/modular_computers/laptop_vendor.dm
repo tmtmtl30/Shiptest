@@ -234,19 +234,13 @@
 		ui.open()
 
 /obj/machinery/lapvend/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/spacecash/bundle))
-		var/obj/item/spacecash/bundle/c = I
+	if(istype(I, /obj/item/money_stack))
+		var/obj/item/money_stack/c = I
 		if(!user.temporarilyRemoveItemFromInventory(c))
 			return
 		credits += c.value
 		visible_message("<span class='info'><span class='name'>[user]</span> inserts [c.value] cr into [src].</span>")
 		qdel(c)
-		return
-	else if(istype(I, /obj/item/holochip))
-		var/obj/item/holochip/HC = I
-		credits += HC.credits
-		visible_message("<span class='info'>[user] inserts a [HC.credits] cr holocredit chip into [src].</span>")
-		qdel(HC)
 		return
 	else if(istype(I, /obj/item/card/id))
 		if(state != 2)
@@ -254,7 +248,7 @@
 		var/obj/item/card/id/ID = I
 		var/datum/bank_account/account = ID.registered_account
 		var/target_credits = total_price - credits
-		if(!account.adjust_money(-target_credits, "laptop_vendor"))
+		if(!account.adjust_money(-target_credits, "laptop_vendor_purchase"))
 			say("Insufficient credits on card to purchase!")
 			return
 		credits += target_credits

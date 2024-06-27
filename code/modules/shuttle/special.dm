@@ -277,11 +277,11 @@
 
 	if(account)
 		if(account.account_balance < threshold - payees[AM])
-			account.adjust_money(-account.account_balance, "luxury_shuttle")
+			account.adjust_money(-account.account_balance, "luxury_shuttle_partial")
 			payees[AM] += account.account_balance
 		else
 			var/money_owed = threshold - payees[AM]
-			account.adjust_money(-money_owed)
+			account.adjust_money(-money_owed, "luxury_shuttle_full")
 			payees[AM] += money_owed
 
 	var/list/counted_money = list()
@@ -291,31 +291,21 @@
 			break
 		payees[AM] += C.value
 		counted_money += C
-	for(var/obj/item/spacecash/bundle/S in AM.GetAllContents())
+	for(var/obj/item/money_stack/S in AM.GetAllContents())
 		if(payees[AM] >= threshold)
 			break
 		payees[AM] += S.value
 		counted_money += S
-	for(var/obj/item/holochip/H in AM.GetAllContents())
-		if(payees[AM] >= threshold)
-			break
-		payees[AM] += H.credits
-		counted_money += H
 
 	if(payees[AM] < threshold && istype(AM.pulling, /obj/item/coin))
 		var/obj/item/coin/C = AM.pulling
 		payees[AM] += C.value
 		counted_money += C
 
-	else if(payees[AM] < threshold && istype(AM.pulling, /obj/item/spacecash/bundle))
-		var/obj/item/spacecash/bundle/S = AM.pulling
+	else if(payees[AM] < threshold && istype(AM.pulling, /obj/item/money_stack))
+		var/obj/item/money_stack/S = AM.pulling
 		payees[AM] += S.value
 		counted_money += S
-
-	else if(payees[AM] < threshold && istype(AM.pulling, /obj/item/holochip))
-		var/obj/item/holochip/H = AM.pulling
-		payees[AM] += H.credits
-		counted_money += H
 
 	if(payees[AM] < threshold)
 		var/armless
@@ -340,9 +330,9 @@
 		var/change = FALSE
 		if(payees[AM] > 0)
 			change = TRUE
-			var/obj/item/holochip/HC = new /obj/item/holochip(AM.loc)
-			HC.credits = payees[AM]
-			HC.name = "[HC.credits] credit holochip"
+			var/obj/item/money_stack/holochip/HC = new /obj/item/money_stack/holochip(AM.loc)
+			HC.value = payees[AM]
+			HC.name = "[HC.value] credit holochip"
 			if(istype(AM, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = AM
 				if(!H.put_in_hands(HC))

@@ -101,9 +101,9 @@
 				qdel(C)
 		else
 			to_chat(user, "<span class='warning'>This machine is only accepting cash!</span>")
-	else if(istype(I, /obj/item/spacecash/bundle))
+	else if(istype(I, /obj/item/money_stack/cash))
 		if(paymode == CASH)
-			var/obj/item/spacecash/bundle/H = I
+			var/obj/item/money_stack/cash/H = I
 			if(!user.temporarilyRemoveItemFromInventory(H))
 				return
 			to_chat(user, "<span class='notice'>You insert [H.value] credits into [src]'s! slot</span>")
@@ -264,7 +264,7 @@
 		balance += money - give_payout(JACKPOT)
 		money = 0
 		if(paymode == CASH)
-			new /obj/item/spacecash/bundle(loc,JACKPOT)
+			new /obj/item/money_stack/cash(loc,JACKPOT)
 		else
 			for(var/i = 0, i < 5, i++)
 				cointype = pick(subtypesof(/obj/item/coin))
@@ -314,7 +314,7 @@
 
 /obj/machinery/computer/slot_machine/proc/give_payout(amount)
 	if(paymode == CASH)
-		cointype = /obj/item/spacecash/bundle
+		cointype = /obj/item/money_stack/cash
 	else
 		cointype = obj_flags & EMAGGED ? /obj/item/coin/iron : /obj/item/coin/silver
 
@@ -330,7 +330,7 @@
 
 /obj/machinery/computer/slot_machine/proc/dispense(amount = 0, cointype = /obj/item/coin/silver, mob/living/target, throwit = 0)
 	if(paymode == CASH)
-		var/obj/item/spacecash/bundle/H = new /obj/item/spacecash/bundle(loc, amount)
+		var/obj/item/money_stack/cash/H = new /obj/item/money_stack/cash(loc, amount)
 
 		if(throwit && target)
 			H.throw_at(target, 3, 10)

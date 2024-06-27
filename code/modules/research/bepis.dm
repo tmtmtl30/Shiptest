@@ -51,7 +51,7 @@
 	if(!is_operational)
 		to_chat(user, "<span class='notice'>[src] can't accept money when it's not functioning.</span>")
 		return
-	if(istype(O, /obj/item/holochip) || istype(O, /obj/item/spacecash/bundle))
+	if(istype(O, /obj/item/money_stack))
 		var/deposit_value = O.get_item_credit_value()
 		banked_cash += deposit_value
 		qdel(O)
@@ -102,8 +102,6 @@
 		say("You do not possess enough credits.")
 		return
 	account.adjust_money(-deposit_value, "bepis") //The money vanishes, not paid to any accounts.
-	SSblackbox.record_feedback("amount", "BEPIS_credits_spent", deposit_value)
-	log_econ("[deposit_value] credits were inserted into [src] by [account.account_holder]")
 	banked_cash += deposit_value
 	use_power(1000 * power_saver)
 	say("Cash deposit successful. There is [banked_cash] in the chamber.")
@@ -117,7 +115,7 @@
 		say("Cannot withdraw more than stored funds. Aborting.")
 	else
 		banked_cash -= withdraw_value
-		new /obj/item/spacecash/bundle(src.loc, withdraw_value)
+		new /obj/item/money_stack/holochip(src.loc, withdraw_value)
 		say("Withdrawing [withdraw_value] credits from the chamber.")
 	update_icon_state()
 	return

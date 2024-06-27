@@ -46,6 +46,17 @@
 	RegisterSignal(servant, COMSIG_PARENT_QDELETING, PROC_REF(on_vital_delete))
 	dur_timer = addtimer(VARSET_CALLBACK(src, failed, TRUE), duration, TIMER_STOPPABLE)
 
+	format_log_econ(ECON_LOG_EVENT_MISSION_ACCEPTED, list(
+		"MISSION_REF" = REF(src),
+		"TYPE" = type,
+		// many missions have unique, subtyped objectives that might contain useful info
+		// the description almost certainly contains that information
+		"DESC" = desc,
+		"PAYOUT" = value,
+		"DURATION" = duration,
+		"ACCEPTING_SHIP" = REF(acceptor)
+	))
+
 /datum/mission/proc/on_vital_delete()
 	qdel(src)
 
@@ -63,7 +74,12 @@
 	return ..()
 
 /datum/mission/proc/turn_in()
-	servant.ship_account.adjust_money(value, "mission")
+	servant.ship_account.adjust_money(value, "mission_turned_in")
+	format_log_econ(ECON_LOG_EVENT_MISSION_TURNEDIN, list(
+		"MISSION_REF" = REF(src),
+		"PAYOUT" = value,
+		"TIME_REMAINING" = timeleft(dur_timer)
+	))
 	qdel(src)
 
 /datum/mission/proc/give_up()

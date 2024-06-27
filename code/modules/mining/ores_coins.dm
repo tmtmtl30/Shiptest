@@ -379,6 +379,7 @@ GLOBAL_LIST_INIT(sand_recipes, list(\
 	item_flags = NO_MAT_REDEMPTION //You know, it's kind of a problem that money is worth more extrinsicly than intrinsically in this universe.
 	drop_sound = 'sound/items/handling/coin_drop.ogg'
 	pickup_sound =  'sound/items/handling/coin_pickup.ogg'
+
 /obj/item/coin/Initialize()
 	. = ..()
 	coinflip = pick(sideslist)

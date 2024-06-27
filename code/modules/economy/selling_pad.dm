@@ -34,12 +34,12 @@
 	sell_account = port.current_ship?.ship_account
 
 /obj/machinery/computer/selling_pad_control/attackby(obj/item/I, mob/user)
-	var/value = I.get_item_credit_value()
-	if(value)
-		sell_account.adjust_money(value, "selling_pad")
-		to_chat(user, "<span class='notice'>You deposit [I]. The Vessel Budget is now [sell_account.account_balance] cr.</span>")
-		qdel(I)
-		return TRUE
+	if(sell_account)
+		var/value = sell_account.absorb_cash(I, qdel_after = FALSE)
+		if(value)
+			to_chat(user, "<span class='notice'>You deposit [I]. The Vessel Budget is now [sell_account.account_balance] cr.</span>")
+			qdel(I)
+			return TRUE
 	return ..()
 
 /obj/machinery/computer/selling_pad_control/multitool_act(mob/living/user, obj/item/multitool/I)
@@ -150,7 +150,7 @@
 			total_report.total_amount[E] += ex.total_amount[E]
 			total_report.total_value[E] += ex.total_value[E]
 
-	sell_account.adjust_money(value, "selling_pad")
+	sell_account.adjust_money(value, "selling_pad_sale")
 
 	if(!value)
 		status_report += "Nothing"
