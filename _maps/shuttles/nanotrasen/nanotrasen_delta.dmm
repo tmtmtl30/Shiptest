@@ -1923,8 +1923,8 @@
 	},
 /obj/structure/table,
 /obj/machinery/recharger,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/item/areaeditor/shuttle,
 /turf/open/floor/plasteel/dark,
 /area/ship/bridge)

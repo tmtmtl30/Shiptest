@@ -774,8 +774,8 @@
 /turf/open/floor/plasteel,
 /area/ruin/space/has_grav/spacemall/dorms)
 "dq" = (
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/item/storage/bag/money/vault,
 /obj/item/coin,
 /obj/item/coin,
@@ -1435,7 +1435,7 @@
 	},
 /obj/item/reagent_containers/food/condiment/sugar,
 /obj/structure/closet/wall/directional/north,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /turf/open/floor/plasteel/dark,
 /area/ruin/space/has_grav/spacemall)
 "fp" = (
@@ -5489,7 +5489,7 @@
 /area/ruin/space/has_grav/spacemall/maint)
 "ut" = (
 /obj/structure/safe/floor,
-/obj/item/spacecash/bundle/c500,
+/obj/item/money_stack/cash/c500,
 /obj/item/toy/plush/lizardplushie,
 /obj/effect/turf_decal/corner/opaque/grey/full,
 /obj/effect/turf_decal/corner/opaque/black/diagonal,
@@ -7522,7 +7522,7 @@
 /area/ruin/space/has_grav/spacemall/shop2)
 "CD" = (
 /obj/structure/rack,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/effect/turf_decal/trimline/transparent/neutral/arrow_cw{
 	dir = 8
 	},

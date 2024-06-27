@@ -217,11 +217,11 @@
 	pixel_x = -8;
 	pixel_y = 5
 	},
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c100,
 /turf/open/floor/plasteel/telecomms_floor,
 /area/ship/bridge)
 "bQ" = (

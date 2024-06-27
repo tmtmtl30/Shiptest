@@ -7784,8 +7784,8 @@
 	pixel_y = 9
 	},
 /obj/item/pen/red,
-/obj/item/holochip{
-	credits = 4000
+/obj/item/money_stack/holochip{
+	value = 4000
 	},
 /turf/open/floor/plasteel,
 /area/ship/cargo/office)

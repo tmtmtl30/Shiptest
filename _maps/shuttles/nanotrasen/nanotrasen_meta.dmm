@@ -1520,7 +1520,7 @@
 	icon_state = "0-2"
 	},
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/spacecash/bundle/mediumrand{
+/obj/item/money_stack/cash/mediumrand{
 	pixel_x = 8;
 	pixel_y = 5
 	},
@@ -2824,7 +2824,7 @@
 /obj/structure/closet/crate,
 /obj/effect/spawner/lootdrop/maintenance/four,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/spacecash/bundle/pocketchange,
+/obj/item/money_stack/cash/pocketchange,
 /turf/open/floor/plasteel/dark,
 /area/ship/cargo)
 "FY" = (

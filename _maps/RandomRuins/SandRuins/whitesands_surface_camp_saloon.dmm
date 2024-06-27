@@ -445,7 +445,7 @@
 "lI" = (
 /obj/structure/table/wood/poker,
 /obj/effect/spawner/lootdrop/gambling,
-/obj/item/spacecash/bundle/loadsamoney,
+/obj/item/money_stack/cash/loadsamoney,
 /turf/open/floor/carpet,
 /area/ruin/whitesands/saloon)
 "lV" = (
@@ -1221,7 +1221,7 @@
 /area/ruin/whitesands/saloon)
 "JF" = (
 /obj/structure/table/wood,
-/obj/item/spacecash/bundle/mediumrand,
+/obj/item/money_stack/cash/mediumrand,
 /turf/open/floor/wood,
 /area/ruin/whitesands/saloon)
 "Ku" = (

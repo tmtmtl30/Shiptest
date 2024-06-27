@@ -270,7 +270,7 @@
 /obj/item/clothing/suit/armor/vest/bulletproof/solgov/captain,
 /obj/item/stamp/solgov,
 /obj/item/clothing/suit/armor/solgov_trenchcoat,
-/obj/item/spacecash/bundle/loadsamoney,
+/obj/item/money_stack/cash/loadsamoney,
 /obj/item/gun/ballistic/automatic/powered/gauss/modelh,
 /obj/item/ammo_box/magazine/modelh,
 /obj/item/ammo_box/magazine/modelh,

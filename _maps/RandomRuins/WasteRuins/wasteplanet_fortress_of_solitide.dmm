@@ -756,7 +756,7 @@
 	pixel_x = 5;
 	pixel_y = 4
 	},
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /turf/open/floor/plating,
 /area/ruin/powered)
@@ -1835,7 +1835,7 @@
 /area/ruin/powered)
 "qI" = (
 /obj/structure/table,
-/obj/item/holochip{
+/obj/item/money_stack/holochip{
 	pixel_x = -7;
 	pixel_y = 7
 	},

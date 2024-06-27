@@ -62,8 +62,8 @@
 /obj/structure/rack,
 /obj/effect/decal/cleanable/dirt/dust,
 /obj/machinery/light/dim/directional/north,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/loadsamoney,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/loadsamoney,
 /turf/open/floor/plasteel/patterned/brushed,
 /area/ruin/powered)
 "cb" = (
@@ -1978,7 +1978,7 @@
 /area/ruin/powered)
 "TE" = (
 /obj/structure/table/greyscale,
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_y = 10
 	},
 /obj/item/toy/cards/deck/syndicate{

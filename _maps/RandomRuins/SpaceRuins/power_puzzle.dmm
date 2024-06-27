@@ -3034,7 +3034,7 @@
 /obj/structure/fluff/paper/stack{
 	dir = 1
 	},
-/obj/item/spacecash/bundle/c200{
+/obj/item/money_stack/cash/c200{
 	pixel_x = 7;
 	pixel_y = 8
 	},
@@ -3577,7 +3577,7 @@
 	dir = 1
 	},
 /obj/machinery/light/broken/directional/east,
-/obj/item/spacecash/bundle/c50{
+/obj/item/money_stack/cash/c50{
 	pixel_x = -5;
 	pixel_y = 8
 	},

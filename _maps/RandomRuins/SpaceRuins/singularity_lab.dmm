@@ -4498,7 +4498,7 @@
 /obj/item/storage/fancy/cigarettes/cigpack_robustgold,
 /obj/item/storage/fancy/cigarettes/cigpack_robustgold,
 /obj/item/stack/sheet/mineral/gold/twenty,
-/obj/item/spacecash/bundle/loadsamoney,
+/obj/item/money_stack/cash/loadsamoney,
 /turf/open/floor/pod,
 /area/ruin/space/has_grav/singularitylab/cargo)
 "rL" = (

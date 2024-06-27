@@ -1317,7 +1317,7 @@
 	pixel_x = -10
 	},
 /obj/machinery/power/apc/auto_name/directional/north,
-/obj/item/spacecash/bundle/mediumrand{
+/obj/item/money_stack/cash/mediumrand{
 	pixel_x = 6;
 	pixel_y = 8
 	},

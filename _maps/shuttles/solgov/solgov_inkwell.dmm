@@ -6136,11 +6136,11 @@
 /area/ship/cargo)
 "OF" = (
 /obj/structure/table/wood/fancy/blue,
-/obj/item/spacecash/bundle/loadsamoney{
+/obj/item/money_stack/cash/loadsamoney{
 	pixel_x = 5;
 	pixel_y = 8
 	},
-/obj/item/spacecash/bundle/loadsamoney{
+/obj/item/money_stack/cash/loadsamoney{
 	pixel_x = 5;
 	pixel_y = 8
 	},

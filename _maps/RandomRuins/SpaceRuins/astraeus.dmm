@@ -739,7 +739,7 @@
 /area/ruin/space/has_grav/astraeus/hallway)
 "uN" = (
 /obj/structure/table/wood,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
 /turf/open/floor/carpet/airless,
 /area/ruin/space/has_grav/astraeus/dorms_med)
 "vl" = (

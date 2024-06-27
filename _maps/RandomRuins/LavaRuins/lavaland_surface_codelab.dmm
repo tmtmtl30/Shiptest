@@ -2519,7 +2519,7 @@
 "DH" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/neck/tie/rainbow,
-/obj/item/spacecash/bundle/c20,
+/obj/item/money_stack/cash/c20,
 /turf/open/floor/wood,
 /area/ruin/unpowered/codelab/laboratory)
 "DJ" = (
@@ -2681,7 +2681,7 @@
 "Fz" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/neck/tie/trans,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /turf/open/floor/wood,
 /area/ruin/unpowered/codelab/laboratory)
 "FF" = (
@@ -3205,7 +3205,7 @@
 "Mv" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/neck/tie/purple,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
 /turf/open/floor/wood,
 /area/ruin/unpowered/codelab/laboratory)
 "MB" = (

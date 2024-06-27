@@ -442,7 +442,7 @@
 /area/ship/external/dark)
 "gY" = (
 /obj/structure/table/reinforced,
-/obj/item/spacecash/bundle/c500,
+/obj/item/money_stack/cash/c500,
 /obj/item/storage/lockbox/medal/sec{
 	pixel_y = 16
 	},

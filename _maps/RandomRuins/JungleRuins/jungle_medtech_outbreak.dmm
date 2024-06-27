@@ -1374,11 +1374,11 @@
 /area/ship/science/storage)
 "wJ" = (
 /obj/structure/safe,
-/obj/item/spacecash/bundle/c500,
-/obj/item/spacecash/bundle/c100{
+/obj/item/money_stack/cash/c500,
+/obj/item/money_stack/cash/c100{
 	pixel_y = 5
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_y = 3
 	},
 /turf/open/floor/wood,

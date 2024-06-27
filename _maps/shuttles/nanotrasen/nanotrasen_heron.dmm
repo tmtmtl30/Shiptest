@@ -8743,11 +8743,11 @@
 	pixel_y = 8;
 	pixel_x = -2
 	},
-/obj/item/spacecash/bundle/c100{
+/obj/item/money_stack/cash/c100{
 	pixel_x = -3;
 	pixel_y = -1
 	},
-/obj/item/spacecash/bundle/c500{
+/obj/item/money_stack/cash/c500{
 	pixel_x = -1;
 	pixel_y = -8
 	},

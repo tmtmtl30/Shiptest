@@ -1870,7 +1870,7 @@
 	dir = 10
 	},
 /obj/structure/table/wood,
-/obj/item/spacecash/bundle/loadsamoney{
+/obj/item/money_stack/cash/loadsamoney{
 	pixel_x = 8;
 	pixel_y = 12
 	},

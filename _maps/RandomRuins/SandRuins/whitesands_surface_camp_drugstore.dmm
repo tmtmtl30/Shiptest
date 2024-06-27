@@ -52,16 +52,16 @@
 /area/ruin/unpowered)
 "j" = (
 /obj/structure/closet/cabinet,
-/obj/item/spacecash/bundle/c100,
-/obj/item/spacecash/bundle/c10,
-/obj/item/spacecash/bundle/c1,
-/obj/item/spacecash/bundle/c1,
-/obj/item/spacecash/bundle/c1,
-/obj/item/spacecash/bundle/c1,
-/obj/item/spacecash/bundle/c1,
-/obj/item/spacecash/bundle/c20,
-/obj/item/spacecash/bundle/c200,
-/obj/item/spacecash/bundle/c50,
+/obj/item/money_stack/cash/c100,
+/obj/item/money_stack/cash/c10,
+/obj/item/money_stack/cash/c1,
+/obj/item/money_stack/cash/c1,
+/obj/item/money_stack/cash/c1,
+/obj/item/money_stack/cash/c1,
+/obj/item/money_stack/cash/c1,
+/obj/item/money_stack/cash/c20,
+/obj/item/money_stack/cash/c200,
+/obj/item/money_stack/cash/c50,
 /turf/open/floor/wood,
 /area/ruin/unpowered)
 "k" = (

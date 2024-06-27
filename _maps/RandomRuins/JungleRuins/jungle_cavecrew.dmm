@@ -3068,11 +3068,11 @@
 	pixel_y = 10
 	},
 /obj/item/dice/d2,
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 3;
 	pixel_y = 8
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 6;
 	pixel_y = 11
 	},

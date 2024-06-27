@@ -56,7 +56,7 @@
 	pixel_x = -6;
 	pixel_y = 7
 	},
-/obj/item/spacecash/bundle/c50,
+/obj/item/money_stack/cash/c50,
 /obj/item/radio/intercom/wideband/directional/east,
 /obj/structure/table/reinforced,
 /obj/effect/decal/cleanable/cobweb/cobweb2,

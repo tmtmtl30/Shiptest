@@ -646,9 +646,9 @@
 /obj/item/paicard,
 /obj/item/clothing/shoes/cowboy/white,
 /obj/item/clothing/head/caphat/cowboy,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/item/clothing/suit/armor/vest/capcarapace/duster,
 /turf/open/floor/carpet,
 /area/ship/crew)
@@ -2297,7 +2297,7 @@
 /obj/item/storage/toolbox/mechanical{
 	pixel_y = 6
 	},
-/obj/item/spacecash/bundle/c200,
+/obj/item/money_stack/cash/c200,
 /turf/open/floor/mineral/plastitanium,
 /area/ship/bridge)
 "XR" = (

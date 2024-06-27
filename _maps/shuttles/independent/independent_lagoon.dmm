@@ -382,9 +382,9 @@
 /turf/open/floor/wood,
 /area/ship/crew)
 "ch" = (
-/obj/item/spacecash/bundle/c200,
+/obj/item/money_stack/cash/c200,
 /obj/item/clothing/suit/hawaiian,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden/layer2,
 /obj/structure/closet/wall/directional/west,
 /obj/effect/turf_decal/siding/wood{
@@ -562,11 +562,11 @@
 /area/ship/hallway/port)
 "dG" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
-/obj/item/spacecash/bundle/c100,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
+/obj/item/money_stack/cash/c100,
 /obj/item/clothing/suit/jacket/letterman,
 /obj/item/clothing/suit/ianshirt,
-/obj/item/spacecash/bundle/c200,
+/obj/item/money_stack/cash/c200,
 /obj/item/clothing/under/suit/blacktwopiece,
 /obj/machinery/light/small/directional/east,
 /obj/effect/turf_decal/siding/wood{
@@ -1806,7 +1806,7 @@
 /obj/item/clothing/under/dress/blacktango,
 /obj/item/clothing/glasses/sunglasses,
 /obj/item/clothing/gloves/color/evening,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /obj/machinery/light/directional/north,
 /turf/open/floor/carpet/black,
 /area/ship/crew)
@@ -2952,7 +2952,7 @@
 /area/ship/crew/canteen/kitchen)
 "tx" = (
 /obj/structure/table/wood/poker,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ship/crew/office)
 "tA" = (
@@ -6383,7 +6383,7 @@
 /obj/item/clothing/suit/toggle/lawyer/black,
 /obj/item/clothing/neck/tie/blue,
 /obj/item/pen/fountain,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /obj/machinery/light/directional/north,
 /turf/open/floor/carpet/black,
 /area/ship/crew)
@@ -7285,7 +7285,7 @@
 /obj/item/clothing/under/suit/black/female,
 /obj/item/clothing/neck/tie/red,
 /obj/item/toy/cards/deck/syndicate,
-/obj/item/spacecash/bundle/c100,
+/obj/item/money_stack/cash/c100,
 /obj/machinery/light/directional/north,
 /turf/open/floor/carpet/black,
 /area/ship/crew)
@@ -7493,7 +7493,7 @@
 /area/ship/engineering)
 "Zt" = (
 /obj/structure/table/wood/poker,
-/obj/item/spacecash/bundle/c200,
+/obj/item/money_stack/cash/c200,
 /turf/open/floor/light/colour_cycle/dancefloor_a,
 /area/ship/crew/office)
 "Zu" = (

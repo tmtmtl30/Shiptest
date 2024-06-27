@@ -2467,15 +2467,15 @@
 	pixel_x = -6;
 	pixel_y = 8
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 2;
 	pixel_y = -14
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 2;
 	pixel_y = -14
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 4;
 	pixel_y = -16
 	},

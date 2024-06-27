@@ -5328,7 +5328,7 @@
 /obj/structure/sign/poster/contraband/engis_unite{
 	pixel_y = 32
 	},
-/obj/item/spacecash/bundle/pocketchange{
+/obj/item/money_stack/cash/pocketchange{
 	pixel_x = 8;
 	pixel_y = 9
 	},

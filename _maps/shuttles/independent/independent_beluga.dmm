@@ -3969,27 +3969,27 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 3;
 	pixel_y = 10
 	},
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_y = 7;
 	pixel_x = 6
 	},
-/obj/item/spacecash/bundle/c200,
-/obj/item/spacecash/bundle/c100{
+/obj/item/money_stack/cash/c200,
+/obj/item/money_stack/cash/c100{
 	pixel_x = 8;
 	pixel_y = 3
 	},
-/obj/item/spacecash/bundle/c100{
+/obj/item/money_stack/cash/c100{
 	pixel_y = -7
 	},
-/obj/item/spacecash/bundle/c500{
+/obj/item/money_stack/cash/c500{
 	pixel_y = -5;
 	pixel_x = 5
 	},
-/obj/item/spacecash/bundle/c50{
+/obj/item/money_stack/cash/c50{
 	pixel_x = -8;
 	pixel_y = -3
 	},
@@ -3997,7 +3997,7 @@
 	pixel_x = -6;
 	pixel_y = 5
 	},
-/obj/item/spacecash/bundle/c5,
+/obj/item/money_stack/cash/c5,
 /obj/structure/safe/floor,
 /turf/open/floor/plating,
 /area/ship/bridge)
@@ -4455,7 +4455,7 @@
 /obj/item/paper/pamphlet/violent_video_games,
 /obj/item/trash/candy,
 /obj/item/trash/raisins,
-/obj/item/spacecash/bundle/c10{
+/obj/item/money_stack/cash/c10{
 	pixel_x = -9
 	},
 /obj/effect/turf_decal/siding/wood{

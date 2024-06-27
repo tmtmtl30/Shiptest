@@ -3753,8 +3753,8 @@
 	},
 /obj/item/ammo_box/magazine/m45,
 /obj/item/ammo_box/magazine/m45,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden/layer4,
 /turf/open/floor/plasteel/mono/dark,
 /area/ship/bridge)

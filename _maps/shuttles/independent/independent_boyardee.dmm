@@ -613,11 +613,11 @@
 	name = "Bridge Lockdown";
 	pixel_y = -5
 	},
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
 /turf/open/floor/plasteel/dark,
 /area/ship/crew/canteen/kitchen)
 "me" = (

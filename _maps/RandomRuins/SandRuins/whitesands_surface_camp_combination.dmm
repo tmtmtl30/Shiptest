@@ -860,7 +860,7 @@
 /area/ruin)
 "Hb" = (
 /obj/structure/table/wood,
-/obj/item/spacecash/bundle/c500{
+/obj/item/money_stack/cash/c500{
 	pixel_x = 3;
 	pixel_y = 3
 	},

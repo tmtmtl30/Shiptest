@@ -148,11 +148,11 @@
 /obj/structure/table,
 /obj/machinery/light/small/directional/north,
 /obj/effect/decal/cleanable/dirt/dust,
-/obj/item/spacecash/bundle/c100{
+/obj/item/money_stack/cash/c100{
 	pixel_x = 1;
 	pixel_y = 10
 	},
-/obj/item/spacecash/bundle/c100{
+/obj/item/money_stack/cash/c100{
 	pixel_x = 1
 	},
 /turf/open/floor/plasteel/white,

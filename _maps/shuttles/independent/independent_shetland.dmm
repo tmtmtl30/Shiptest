@@ -2596,7 +2596,7 @@
 	},
 /obj/effect/turf_decal/corner/opaque/neutral/half,
 /obj/item/radio/intercom/directional/north,
-/obj/item/spacecash/bundle/c1000{
+/obj/item/money_stack/cash/c1000{
 	pixel_x = 4;
 	pixel_y = 8
 	},
