@@ -72,9 +72,9 @@
 /area/overmap_encounter/planetoid/lava/explored)
 "aM" = (
 /obj/item/documents/nanotrasen,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
-/obj/item/spacecash/bundle/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
+/obj/item/money_stack/cash/c1000,
 /obj/item/stock_parts/cell/gun/upgraded,
 /obj/structure/safe,
 /turf/open/floor/carpet/blue,

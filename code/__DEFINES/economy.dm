@@ -15,7 +15,6 @@
 
 #define NO_FREEBIES "commies go home"
 
-#warn make sure all of these are actually used
 // Logged when a player spawns onto a ship, so that per-ship finances can be tracked.
 #define ECON_LOG_EVENT_PLAYER_SHIP_SPAWN "PLAYER_SHIP_SPAWN"
 
@@ -29,9 +28,14 @@
 #define ECON_LOG_EVENT_ACCOUNT_ABSORB "ACCOUNT_ABSORB"
 // Used to log removal of money from an account via the creation of holochips.
 #define ECON_LOG_EVENT_ACCOUNT_CREATECHIP "ACCOUNT_CREATECHIP"
+// logged when an account purchases something (cargo, vending machines)
+#define ECON_LOG_EVENT_ACCOUNT_PURCHASE "ACCOUNT_PURCHASE"
 
 // Logged when physical money (holochips or space cash) initializes
 #define ECON_LOG_EVENT_MONEY_CREATED "MONEY_CREATED"
+// Logged when money is qdeleted; helps ensure every dollar is tracked.
+#define ECON_LOG_EVENT_MONEY_DELETED "MONEY_DELETED"
+
 // Logged when physical money (holochips / space cash) is merged with another -- i.e., combining two holochips
 #define ECON_LOG_EVENT_MONEY_MERGED "MONEY_MERGED"
 // Logged when physical money (holochips / space cash) is split -- i.e., taking part of the value of a holochip out into a second chip.
@@ -44,9 +48,10 @@
 // logged when a mission is turned-in on time
 #define ECON_LOG_EVENT_MISSION_TURNEDIN "MISSION_TURNEDIN"
 
-// logged when an account purchases something (cargo, vending machines)
-#define ECON_LOG_EVENT_ACCOUNT_PURCHASE "ACCOUNT_PURCHASE"
-#warn remove?
-// logged when a mob purchases something (think black markets -- note that this is much harder to fully track)
+// logged when a mob inserts physical money into an object's internal money repository
+#define ECON_LOG_EVENT_PERSONAL_INSERT "PERSONAL_INSERT"
+// logged when a mob receives physical money from an object's internal money repository
+#define ECON_LOG_EVENT_PERSONAL_WITHDRAW "PERSONAL_WITHDRAW"
+// logged when a mob purchases something from an object using money, but without going through their account
 #define ECON_LOG_EVENT_PERSONAL_PURCHASE "PERSONAL_PURCHASE"
 

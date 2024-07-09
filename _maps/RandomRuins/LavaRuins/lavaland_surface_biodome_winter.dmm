@@ -1286,7 +1286,7 @@
 /area/ruin/unpowered/winter_biodome/living_quarters)
 "vk" = (
 /obj/structure/table/wood,
-/obj/item/spacecash/bundle/smallrand,
+/obj/item/money_stack/cash/smallrand,
 /turf/open/floor/wood,
 /area/ruin/unpowered/winter_biodome/cabin)
 "vo" = (

@@ -47,6 +47,13 @@
 
 		if(I.buy(uplink, user, method))
 			uplink.money -= price
+			format_log_econ(ECON_LOG_EVENT_PERSONAL_PURCHASE, list(
+				"MOB" = REF(user),
+				"TARGET" = REF(uplink),
+				"TARGET_TYPE" = uplink.type,
+				"PURCHASE_TYPE" = I.item,
+				"PRICE" = price
+			))
 			return TRUE
 		return FALSE
 

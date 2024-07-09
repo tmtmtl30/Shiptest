@@ -10,6 +10,8 @@
 
 	/// If you want the stack's value, use get_item_credit_value() instead!
 	VAR_PROTECTED/value = 0
+	/// The "base" type of this money stack. Can merge with other instances of this type, and creates its own when it is split.
+	/// If this is not set, this should not be initialized!
 	var/merge_split_type
 
 /obj/item/money_stack/Initialize(mapload, amount)
@@ -20,11 +22,15 @@
 		"REF" = REF(src),
 		"TYPE" = type,
 		"VALUE" = value,
-		"LOC" = AREACOORD(src)
+		"TURF" = AREACOORD(src)
 	))
 	update_appearance()
 
 /obj/item/money_stack/Destroy(...)
+	format_log_econ(ECON_LOG_EVENT_MONEY_DELETED, list(
+		"REF" = REF(src),
+		"VALUE" = value
+	))
 	// on the off chance somebody manages to interact with this after it gets qdeleted...
 	value = 0
 	return ..()

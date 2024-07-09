@@ -1,9 +1,8 @@
 /obj/item/blackmarket_uplink
 	name = "Black Market Uplink"
-	#warn add a description
+	desc = "A jury rigged uplink capable of accessing illicit or grey market vendors. There's a port on side for linking it to a LTSRBT for more practical shipping."
 	icon = 'icons/obj/blackmarket.dmi'
 	icon_state = "uplink"
-	desc = "A jury rigged uplink capable of accessing illicit or grey market vendors. There's a port on side for linking it to a LTSRBT for more practical shipping."
 
 	// UI variables.
 	var/viewing_category
@@ -26,7 +25,6 @@
 		if(categories && categories.len)
 			viewing_category = categories[1]
 
-#warn should be logged as a form of spending, extraction; note also purchases!
 /obj/item/blackmarket_uplink/attackby(obj/item/I, mob/user, params)
 	if(iscash(I))
 		var/worth = I.get_item_credit_value()
@@ -34,6 +32,13 @@
 			to_chat(user, "<span class='warning'>[I] doesn't seem to be worth anything!</span>")
 		money += worth
 		to_chat(user, "<span class='notice'>You slot [I] into [src] and it reports a total of [money] credits inserted.</span>")
+		format_log_econ(ECON_LOG_EVENT_PERSONAL_INSERT, list(
+			"MOB" = REF(user),
+			"TARGET" = REF(src),
+			"TARGET_TYPE" = type,
+			"ITEM" = REF(I),
+			"VALUE" = worth
+		))
 		qdel(I)
 		return
 	. = ..()
@@ -54,7 +59,16 @@
 
 	var/obj/item/money_stack/holochip/holochip = new (user.drop_location(), amount_to_remove)
 	money -= amount_to_remove
-	holochip.name = "washed " + holochip.name
+	holochip.name = "washed " + holochip.name // call it washed all you want, this money is still logged!
+	format_log_econ(ECON_LOG_EVENT_PERSONAL_WITHDRAW, list(
+		"MOB" = REF(user),
+		"TARGET" = REF(src),
+		"TARGET_TYPE" = type,
+		"ITEM" = REF(holochip),
+		"ITEM_TYPE" = holochip.type,
+		"VALUE" = amount_to_remove
+	))
+
 	user.put_in_hands(holochip)
 	to_chat(user, "<span class='notice'>You withdraw [amount_to_remove] credits into a holochip.</span>")
 

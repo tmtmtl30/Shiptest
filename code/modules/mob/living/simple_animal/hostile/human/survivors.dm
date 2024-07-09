@@ -220,7 +220,7 @@
 			if(prob(30))
 				l_pocket = /obj/item/reagent_containers/food/snacks/meat/steak/goliath
 			if(prob(20))
-				r_pocket = /obj/item/spacecash/bundle/smallrand
+				r_pocket = /obj/item/money_stack/cash/smallrand
 
 		if("hunter")
 			uniform = pickweight(list(

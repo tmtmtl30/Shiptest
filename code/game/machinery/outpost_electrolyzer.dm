@@ -223,7 +223,6 @@
 
 
 //Hydrogen exchange
-
 /obj/machinery/computer/hydrogen_exchange
 	name = "Hydrogen Exchange"
 	desc = "Credits to Merits at reasonable rates!"
@@ -235,16 +234,17 @@
 	var/credits = NONE
 
 /obj/machinery/computer/hydrogen_exchange/attackby(obj/item/I, mob/user)
-	var/value = 0
-	if(istype(I, /obj/item/spacecash/bundle))
-		var/obj/item/spacecash/bundle/C = I
-		value = C.value
-	else if(istype(I, /obj/item/holochip))
-		var/obj/item/holochip/H = I
-		value = H.credits
-	if(value)
-		credits += value
+	var/val = I.get_item_credit_value()
+	if(val)
+		credits += val
 		to_chat(user, "<span class='notice'>You deposit [I], for a total of [credits] credits.</span>")
+		format_log_econ(ECON_LOG_EVENT_PERSONAL_INSERT, list(
+			"MOB" = REF(user),
+			"TARGET" = REF(src),
+			"TARGET_TYPE" = type,
+			"ITEM" = REF(I),
+			"VALUE" = val
+		))
 		qdel(I)
 		return
 	if(istype(I, /obj/item/merit/bundle))
@@ -260,14 +260,25 @@
 	var/actual = round((0.4 + extra), 0.01) //.4 on low end, 1 on high end
 	return actual
 
-/obj/machinery/computer/hydrogen_exchange/proc/dispense_funds()
+/obj/machinery/computer/hydrogen_exchange/proc/dispense_funds(mob/user)
 	var/makenoise
 	if(merits)
 		new /obj/item/merit/bundle(drop_location(), merits)
 		merits = 0
 		makenoise = TRUE
 	if(credits)
-		new /obj/item/spacecash/bundle(drop_location(), credits)
+		var/obj/item/money_stack/cash/made_cash = new(drop_location(), credits)
+		// we don't log ECON_LOG_EVENT_PERSONAL_PURCHASE for merit conversion, because
+		// doing so might lead to double-counts (merits -> cash -> merits -> cash).
+		// we're chiefly concerned with money here, not hydrogen, so it's not a big deal
+		format_log_econ(ECON_LOG_EVENT_PERSONAL_WITHDRAW, list(
+			"MOB" = REF(user),
+			"TARGET" = REF(src),
+			"TARGET_TYPE" = type,
+			"ITEM" = REF(made_cash),
+			"ITEM_TYPE" = made_cash.type,
+			"VALUE" = credits
+		))
 		credits = 0
 		makenoise = TRUE
 	if(makenoise)
@@ -297,7 +308,7 @@
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 20, FALSE)
 
 /obj/machinery/computer/hydrogen_exchange/AltClick(mob/user)
-	dispense_funds()
+	dispense_funds(user)
 	to_chat(user, "<span class='notice'>You force the credits and merits out of the machine.</span>")
 
 /obj/machinery/computer/hydrogen_exchange/ui_interact(mob/user, datum/tgui/ui)
@@ -333,7 +344,7 @@
 			convert_to_merits()
 			. = TRUE
 		if("dispense")
-			dispense_funds()
+			dispense_funds(usr)
 			. = TRUE
 
 //SCRIP!

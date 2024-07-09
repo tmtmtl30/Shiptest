@@ -16,13 +16,10 @@
 	return ..()
 
 /obj/item/card/bank/attackby(obj/item/W, mob/user, params)
-	if(istype(W, /obj/item/holochip))
-		insert_money(W, user)
+	if(istype(W, /obj/item/money_stack/holochip))
+		insert_money(W, user) // special case for holochips, which have different flavor text
 		return
-	else if(istype(W, /obj/item/spacecash/bundle))
-		insert_money(W, user, TRUE)
-		return
-	else if(istype(W, /obj/item/coin))
+	else if(istype(W, /obj/item/money_stack) || istype(W, /obj/item/coin))
 		insert_money(W, user, TRUE)
 		return
 	else if(istype(W, /obj/item/storage/bag/money))
@@ -38,22 +35,20 @@
 		return ..()
 
 /obj/item/card/bank/proc/insert_money(obj/item/I, mob/user, physical_currency)
-	var/cash_money = I.get_item_credit_value()
-	if(!cash_money)
-		to_chat(user, "<span class='warning'>[I] doesn't seem to be worth anything!</span>")
-		return
-
 	if(!registered_account)
 		to_chat(user, "<span class='warning'>[src] doesn't have a linked account to deposit [I] into!</span>")
 		return
 
-	registered_account.adjust_money(cash_money)
-	SSblackbox.record_feedback("amount", "credits_inserted", cash_money)
-	log_econ("[cash_money] credits were inserted into [src] owned by [src.registered_name]")
+	// not qdeleting in the proc because we want to make some messages afterwards; we do it ourselves
+	var/item_value = registered_account.absorb_cash(I, qdel_after = FALSE)
+	if(!item_value)
+		to_chat(user, "<span class='warning'>[I] doesn't seem to be worth anything!</span>")
+		return
+
 	if(physical_currency)
-		to_chat(user, "<span class='notice'>You stuff [I] into [src]. It disappears in a small puff of bluespace smoke, adding [cash_money] credits to the linked account.</span>")
+		to_chat(user, "<span class='notice'>You stuff [I] into [src]. It disappears in a small puff of bluespace smoke, adding [item_value] credits to the linked account.</span>")
 	else
-		to_chat(user, "<span class='notice'>You insert [I] into [src], adding [cash_money] credits to the linked account.</span>")
+		to_chat(user, "<span class='notice'>You insert [I] into [src], adding [item_value] credits to the linked account.</span>")
 
 	to_chat(user, "<span class='notice'>The linked account now reports a balance of [registered_account.account_balance] cr.</span>")
 	qdel(I)
@@ -63,16 +58,9 @@
 		return FALSE
 
 	var/total = 0
-
-	for (var/obj/item/physical_money in money)
-		var/cash_money = physical_money.get_item_credit_value()
-
-		total += cash_money
-
-		registered_account.adjust_money(cash_money)
-	SSblackbox.record_feedback("amount", "credits_inserted", total)
-	log_econ("[total] credits were inserted into [src] owned by [src.registered_name]")
-	QDEL_LIST(money)
+	for(var/obj/item/physical_money in money)
+		// a bit slower than the old approach, but this proc is insanely rarely used
+		registered_account.absorb_cash(physical_money)
 
 	return total
 
@@ -127,18 +115,14 @@
 		return
 
 	var/amount_to_remove =  FLOOR(input(user, "How much do you want to withdraw? Current Balance: [registered_account.account_balance]", "Withdraw Funds", 5) as num|null, 1)
+	if(!alt_click_can_use_id(user) || !amount_to_remove || amount_to_remove < 0)
+		return
 
-	if(!amount_to_remove || amount_to_remove < 0)
-		return
-	if(!alt_click_can_use_id(user))
-		return
-	if(registered_account.adjust_money(-amount_to_remove))
-		var/obj/item/holochip/holochip = new (user.drop_location(), amount_to_remove)
+	var/obj/item/money_stack/holochip/holochip = registered_account.create_holochip(user.drop_location(), amount_to_remove)
+	if(holochip)
 		user.put_in_hands(holochip)
 		to_chat(user, "<span class='notice'>You withdraw [amount_to_remove] credits into a holochip.</span>")
-		SSblackbox.record_feedback("amount", "credits_removed", amount_to_remove)
-		log_econ("[amount_to_remove] credits were removed from [src] owned by [registered_account.account_holder]")
-		return
+	// we made sure that the amount removed isn't invalid, so it could only fail due to inadequate funds
 	else
 		var/difference = amount_to_remove - registered_account.account_balance
 		registered_account.bank_card_talk("<span class='warning'>ERROR: The linked account requires [difference] more credit\s to perform that withdrawal.</span>", TRUE)
