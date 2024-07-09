@@ -10,7 +10,7 @@
 	throwforce = 12
 	throw_speed = 2
 	throw_range = 7
-	w_class = WEIGHT_CLASS_BULKY
+	w_class = WEIGHT_CLASS_NORMAL
 	custom_materials = list(/datum/material/iron = 500)
 	attack_verb = list("robusted")
 	hitsound = 'sound/weapons/smash.ogg'
@@ -299,7 +299,7 @@
 		/obj/item/clothing/gloves/color/latex/nitrile/infiltrator,
 		/obj/item/clothing/mask/infiltrator,
 		/obj/item/clothing/shoes/combat/sneakboots,
-		/obj/item/gun/ballistic/automatic/pistol,
+		/obj/item/gun/ballistic/automatic/pistol/syndicate,
 		/obj/item/gun/ballistic/revolver,
 		/obj/item/ammo_box
 		))

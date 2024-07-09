@@ -1,16 +1,18 @@
 /datum/bank_account
 	var/account_holder = "Rusty Venture"
 	var/account_balance = 0
+	var/holder_age = 18
 	var/list/bank_cards = list()
 	var/add_to_accounts = TRUE
 	var/account_id
 
 // "owner_name" is used in several spots. "owner_ref" is used purely for logging
-/datum/bank_account/New(start_balance = 0, owner_name, owner_ref)
+/datum/bank_account/New(start_balance = 0, owner_name, owner_ref, age)
 	if(add_to_accounts)
 		SSeconomy.bank_accounts += src
 	account_balance = start_balance
 	account_holder = owner_name
+	holder_age = age
 	account_id = rand(111111,999999)
 
 	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATED, list(
@@ -25,8 +27,8 @@
 /datum/bank_account/Destroy()
 	if(add_to_accounts)
 		SSeconomy.bank_accounts -= src
-	for(var/obj/item/card/id/id_card as anything in bank_cards)
-		id_card.registered_account = null
+	for(var/obj/item/card/bank/bank_card as anything in bank_cards)
+		bank_card.registered_account = null
 	return ..()
 
 /// Returns whether the account has greater than or equal to the passed amount of credits.
@@ -117,10 +119,6 @@
 		return
 	for(var/obj/A in bank_cards)
 		var/icon_source = A
-		if(istype(A, /obj/item/card/id))
-			var/obj/item/card/id/id_card = A
-			if(id_card.uses_overlays)
-				icon_source = id_card.get_cached_flat_icon()
 		var/mob/card_holder = recursive_loc_check(A, /mob)
 		if(ismob(card_holder)) //If on a mob
 			if(!card_holder.client || (!(card_holder.client.prefs.chat_toggles & CHAT_BANKCARD) && !force))
