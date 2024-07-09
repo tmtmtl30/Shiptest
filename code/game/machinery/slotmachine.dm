@@ -106,8 +106,8 @@
 			var/obj/item/money_stack/cash/H = I
 			if(!user.temporarilyRemoveItemFromInventory(H))
 				return
-			to_chat(user, "<span class='notice'>You insert [H.value] credits into [src]'s! slot</span>")
-			balance += H.value
+			to_chat(user, "<span class='notice'>You insert [H.get_item_credit_value()] credits into [src]'s! slot</span>")
+			balance += H.get_item_credit_value()
 			qdel(H)
 		else
 			to_chat(user, "<span class='warning'>This machine is only accepting coins!</span>")

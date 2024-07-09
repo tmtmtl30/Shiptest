@@ -5,12 +5,22 @@
 	var/add_to_accounts = TRUE
 	var/account_id
 
-/datum/bank_account/New(newname, job)
+// "owner_name" is used in several spots. "owner_ref" is used purely for logging
+/datum/bank_account/New(start_balance = 0, owner_name, owner_ref)
 	if(add_to_accounts)
 		SSeconomy.bank_accounts += src
-	account_holder = newname
+	account_balance = start_balance
+	account_holder = owner_name
 	account_id = rand(111111,999999)
-	log_creation()
+
+	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATED, list(
+		"ACCOUNT_ID" = account_id,
+		"REF" = REF(src),
+		"TYPE" = type,
+		"TOTAL" = account_balance,
+		"HOLDER_REF" = owner_ref,
+		"HOLDER_NAME" = account_holder,
+	))
 
 /datum/bank_account/Destroy()
 	if(add_to_accounts)
@@ -18,17 +28,6 @@
 	for(var/obj/item/card/id/id_card as anything in bank_cards)
 		id_card.registered_account = null
 	return ..()
-
-// Split off into its own proc so that it can be separately called by /datum/bank_account/ship
-/datum/bank_account/proc/log_creation()
-	// starting balance unlogged, as it is assumed to be 0
-	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATED, list(
-		"ACCOUNT_ID" = account_id,
-		"REF" = REF(src),
-		"TYPE" = type,
-		"HOLDER_NAME" = account_holder,
-	))
-	#warn log ship affiliation?
 
 /// Returns whether the account has greater than or equal to the passed amount of credits.
 /datum/bank_account/proc/has_money(amt)
@@ -152,8 +151,3 @@
 /datum/bank_account/ship
 	add_to_accounts = FALSE
 
-/datum/bank_account/ship/New(newname, budget)
-	account_holder = newname
-	log_creation()
-	// we do this after logging the account's creation, so that events are logged in a nice order
-	adjust_money(budget, "starting_money")

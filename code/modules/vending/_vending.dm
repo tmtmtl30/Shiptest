@@ -790,7 +790,12 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 						return
 
 					account.adjust_money(-price_to_use, "vendor_purchase")
-					log_econ("[price_to_use] credits were inserted into [src] by [H] to buy [R].")
+					if(mining_point_vendor)
+						format_log_econ(ECON_LOG_EVENT_ACCOUNT_PURCHASE, list(
+							"ACCOUNT_REF" = REF(account),
+							"PURCHASE_TYPE" = R.product_path,
+							"PRICE" = price_to_use,
+						))
 			if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
 				say("Thank you for shopping with [src]!")
 				purchase_message_cooldown = world.time + 5 SECONDS
@@ -1021,10 +1026,16 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 							owner.transfer_money(account, S.custom_price)
 						else
 							account.adjust_money(-S.custom_price, "custom_vendor_purchase")
-						log_econ("[S.custom_price] credits were spent on [src] buying a [S] by [owner.account_holder], owned by [private_a.account_holder].")
 						vending_machine_input[N] = max(vending_machine_input[N] - 1, 0)
 						S.forceMove(drop_location())
 						loaded_items--
+
+						format_log_econ(ECON_LOG_EVENT_ACCOUNT_PURCHASE, list(
+							"ACCOUNT_REF" = REF(account),
+							"PURCHASE_TYPE" = S.type,
+							"PRICE" = S.custom_price,
+						))
+
 						use_power(5)
 						if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
 							say("Thank you for buying local and purchasing [S]!")

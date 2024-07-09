@@ -12,7 +12,6 @@
 	var/amount_deposited = 0 //keep track of the amount deposited over time so you can pay multiple times to reach the signaler threshold
 	var/force_fee = 0 //replaces the "pay whatever" functionality with a set amount when non-zero.
 
-#warn lots of behavior here -- spacecash, holochips, purchases. looks like transfers are done indirectly
 /obj/machinery/paystand/attackby(obj/item/W, mob/user, params)
 	if(istype(W, /obj/item/card/id))
 		if(W == my_card)
@@ -68,12 +67,12 @@
 	if(istype(W, /obj/item/money_stack))
 		var/obj/item/money_stack/M = W
 		var/cashmoney = input(user, "How much would you like to deposit?", "Money Deposit") as null|num
-		if(M.spend(cashmoney, FALSE))
+		if(M.alter_value(-cashmoney))
 			purchase(user, cashmoney)
 			to_chat(user, "Thanks for purchasing! The vendor has been informed.")
 			return
 		else
-			to_chat(user, "<span class='warning'>ERROR: Insufficient funds to make transaction.</span>")
+			to_chat(user, "<span class='warning'>ERROR: Insufficient funds to make transaction, or invalid value.</span>")
 			return
 	if(istype(W, /obj/item/coin))
 		to_chat(user, "What is this, the 1800s? We only take card here.")

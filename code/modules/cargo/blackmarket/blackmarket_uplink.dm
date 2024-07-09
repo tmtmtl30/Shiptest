@@ -1,5 +1,6 @@
 /obj/item/blackmarket_uplink
 	name = "Black Market Uplink"
+	#warn add a description
 	icon = 'icons/obj/blackmarket.dmi'
 	icon_state = "uplink"
 

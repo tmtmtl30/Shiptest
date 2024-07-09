@@ -179,7 +179,6 @@
 
 			playsound(src, 'sound/machines/twobeep_high.ogg', 50, TRUE)
 			src.visible_message("<span class='notice'>[src] dispenses a holochip.</span>")
-			#warn should check adjacency
 			if(ishuman(usr))
 				var/mob/living/carbon/human/user = usr
 				user.put_in_hands(cash_chip)
@@ -228,7 +227,6 @@
 					CHECK_TICK
 				landing_turf = pick(empty_turfs)
 
-			#warn crate purchase logging goes here
 			// note that, because of CHECK_TICK above, we aren't sure if we can
 			// afford the pack, even though we checked earlier. luckily adjust_money
 			// returns false if the account can't afford the price
@@ -244,6 +242,13 @@
 					rank = "Silicon"
 				var/datum/supply_order/SO = new(pack, name, rank, usr.ckey, "")
 				new /obj/effect/pod_landingzone(landing_turf, podType, SO)
+
+				format_log_econ(ECON_LOG_EVENT_ACCOUNT_PURCHASE, list(
+					"ACCOUNT_REF" = REF(charge_account),
+					"PURCHASE_TYPE" = pack.type,
+					"PRICE" = pack.cost
+				))
+
 				update_appearance() // ??????????????????
 				return TRUE
 

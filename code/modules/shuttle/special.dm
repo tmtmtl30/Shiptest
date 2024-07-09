@@ -289,12 +289,12 @@
 	for(var/obj/item/coin/C in AM.GetAllContents())
 		if(payees[AM] >= threshold)
 			break
-		payees[AM] += C.value
+		payees[AM] += C.get_item_credit_value()
 		counted_money += C
 	for(var/obj/item/money_stack/S in AM.GetAllContents())
 		if(payees[AM] >= threshold)
 			break
-		payees[AM] += S.value
+		payees[AM] += S.get_item_credit_value()
 		counted_money += S
 
 	if(payees[AM] < threshold && istype(AM.pulling, /obj/item/coin))
@@ -304,7 +304,7 @@
 
 	else if(payees[AM] < threshold && istype(AM.pulling, /obj/item/money_stack))
 		var/obj/item/money_stack/S = AM.pulling
-		payees[AM] += S.value
+		payees[AM] += S.get_item_credit_value()
 		counted_money += S
 
 	if(payees[AM] < threshold)
@@ -330,9 +330,7 @@
 		var/change = FALSE
 		if(payees[AM] > 0)
 			change = TRUE
-			var/obj/item/money_stack/holochip/HC = new /obj/item/money_stack/holochip(AM.loc)
-			HC.value = payees[AM]
-			HC.name = "[HC.value] credit holochip"
+			var/obj/item/money_stack/holochip/HC = new /obj/item/money_stack/holochip(AM.loc, payees[AM])
 			if(istype(AM, /mob/living/carbon/human))
 				var/mob/living/carbon/human/H = AM
 				if(!H.put_in_hands(HC))

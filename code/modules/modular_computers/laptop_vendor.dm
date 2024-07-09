@@ -238,8 +238,9 @@
 		var/obj/item/money_stack/c = I
 		if(!user.temporarilyRemoveItemFromInventory(c))
 			return
-		credits += c.value
-		visible_message("<span class='info'><span class='name'>[user]</span> inserts [c.value] cr into [src].</span>")
+		var/num_creds = c.get_item_credit_value()
+		credits += num_creds
+		visible_message("<span class='info'><span class='name'>[user]</span> inserts [num_creds] cr into [src].</span>")
 		qdel(c)
 		return
 	else if(istype(I, /obj/item/card/id))

@@ -49,9 +49,6 @@
 	format_log_econ(ECON_LOG_EVENT_MISSION_ACCEPTED, list(
 		"MISSION_REF" = REF(src),
 		"TYPE" = type,
-		// many missions have unique, subtyped objectives that might contain useful info
-		// the description almost certainly contains that information
-		"DESC" = desc,
 		"PAYOUT" = value,
 		"DURATION" = duration,
 		"ACCEPTING_SHIP" = REF(acceptor)

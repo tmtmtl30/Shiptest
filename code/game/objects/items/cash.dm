@@ -1,5 +1,3 @@
-#warn remove old type usage, incl. credit_holochip.dm -- obj/item/spacecash (/bundle), /obj/item/holochip . includes map edits!
-
 // Type for a "stack" of money, used for both holochips and cash bundles.
 // Has support for a few basic logged operations (splitting and merging).
 // This is intended to be an abstract type -- use subtypes!
@@ -10,7 +8,8 @@
 	icon_state = "credit0"
 	w_class = WEIGHT_CLASS_TINY
 
-	var/value = 0
+	/// If you want the stack's value, use get_item_credit_value() instead!
+	VAR_PROTECTED/value = 0
 	var/merge_split_type
 
 /obj/item/money_stack/Initialize(mapload, amount)
@@ -35,6 +34,7 @@
 	. += "<span class='notice'>It contains [value] credit[(value > 1) ? "s" : ""].</span>\n"+\
 	"<span class='notice'>Alt-Click to split.</span>"
 
+// Used by external code to get the stack's value.
 /obj/item/money_stack/get_item_credit_value()
 	return value
 
@@ -58,15 +58,39 @@
 	else
 		. = ..()
 
+/// Alters the value of the stack, updating its appearance and possibly qdeleting it.
+/// Amount passed must be a whole number. Additionally, if it is negative, its magnitude must be
+/// equal to or less than that of the stack's current value (to prevent drawing more than the stack contains).
+/// Logging can also be prevented by passing log = FALSE; this should only be done if it would create a duplicate log.
+/// Returns TRUE if the alteration was successful, and FALSE otherwise.
+/obj/item/money_stack/proc/alter_value(amount, log = TRUE)
+	if(amount != round(amount) || (amount < 0 && value < (-amount)))
+		return FALSE
+	value += amount
+	if(value > 0)
+		update_appearance()
+	else
+		qdel(src)
+
+	if(log)
+		format_log_econ(ECON_LOG_EVENT_MONEY_ALTERED, list(
+			"REF" = REF(src),
+			"TYPE" = type,
+			"AMT" = amount,
+			"FINAL_VALUE" = value
+		))
+
+	return TRUE
+
 /// Merges the passed money stack S into src, so long as it is a subtype of src.merge_split_type.
 /// Has an optional "user" arg for feedback messages.
 /// Returns TRUE if successful, FALSE otherwise.
-/obj/item/money_stack/merge_from(obj/item/money_stack/S, mob/user)
+/obj/item/money_stack/proc/merge_from(obj/item/money_stack/S, mob/user)
 	if(!istype(S, merge_split_type))
 		to_chat(user, "<span class='warning'>[S] cannot be merged into [src].</span>")
 		return FALSE
 
-	format_log_econ(ECON_LOG_EVENT_MONEY_MERGE, list(
+	format_log_econ(ECON_LOG_EVENT_MONEY_MERGED, list(
 		"FINAL_REF" = REF(src),
 		"FINAL_TYPE" = type,
 		"SOURCE_REF" = REF(S),
@@ -75,23 +99,21 @@
 		"NEW_FINAL_VALUE" = value + S.value,
 	))
 
-	value += S.value
-	qdel(S)
-
+	alter_value(S.value, log = FALSE)
 	to_chat(user, "<span class='notice'>You add [S.value] credits worth of money to [src].<br>It now holds [value] credits.</span>")
-	update_appearance()
+
+	qdel(S)
 	return TRUE
 
 /// Splits src into a second stack of type src.merge_split_type -- the stack is created at
 /// stack_loc with "amount" credits, which must be less than src.value.
 /// If the split brings the stack to 0 credits, it is qdeleted.
 /// Returns the new stack if successful, FALSE otherwise.
-/obj/item/money_stack/split_into(stack_loc, amount)
+/obj/item/money_stack/proc/split_into(stack_loc, amount)
 	if(amount > value)
 		return FALSE
 
 	var/obj/item/money_stack/new_stack = new merge_split_type(stack_loc, amount)
-	value -= amount
 
 	format_log_econ(ECON_LOG_EVENT_MONEY_SPLIT, list(
 		"SOURCE_REF" = REF(src),
@@ -99,18 +121,14 @@
 		"DEST_REF" = REF(new_stack),
 		"DEST_TYPE" = new_stack.type,
 		"TRANSFER_AMT" = amount,
-		"NEW_SOURCE_VALUE" = value,
+		"NEW_SOURCE_VALUE" = value - amount,
 	))
 
-	if(value > 0)
-		update_appearance()
-	else
-		qdel(src)
-
+	alter_value(-amount, log = FALSE)
 	return new_stack
 
 /// Wrapper around split_into(), used for interactions.
-/obj/item/money_stack/split_stack_popup(mob/living/user)
+/obj/item/money_stack/proc/split_stack_popup(mob/living/user)
 	var/cashamount = input(user, "How many credits do you want to take? (0 to [value])", "Take Money", 20) as num
 	cashamount = round(clamp(cashamount, 0, value))
 	if(!cashamount)
@@ -213,7 +231,6 @@
 
 	merge_split_type = /obj/item/money_stack/cash
 
-#warn not actually a very good solution. also mangles the update_appearance division of labor
 // Code borrowed from baycode by way of Eris.
 /obj/item/money_stack/cash/update_appearance()
 	icon_state = "nothing"
@@ -331,20 +348,3 @@
 	value = rand(2500, 6000)
 	icon_state = "credit1000"
 	. = ..()
-
-# warn delete after removing spend() call by pay stand
-/*
-/obj/item/holochip/proc/spend(amount, pay_anyway = FALSE)
-	if(credits >= amount)
-		credits -= amount
-		if(credits == 0)
-			qdel(src)
-		update_appearance()
-		return amount
-	else if(pay_anyway)
-		qdel(src)
-		return credits
-	else
-		return 0
-
-*/

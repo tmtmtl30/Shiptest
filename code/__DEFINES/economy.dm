@@ -36,6 +36,8 @@
 #define ECON_LOG_EVENT_MONEY_MERGED "MONEY_MERGED"
 // Logged when physical money (holochips / space cash) is split -- i.e., taking part of the value of a holochip out into a second chip.
 #define ECON_LOG_EVENT_MONEY_SPLIT "MONEY_SPLIT"
+// Logged when the value of money is directly altered; this is something of a fallback.
+#define ECON_LOG_EVENT_MONEY_ALTERED "MONEY_ALTERED"
 
 // logged when a mission is accepted
 #define ECON_LOG_EVENT_MISSION_ACCEPTED "MISSION_ACCEPTED"
@@ -44,6 +46,7 @@
 
 // logged when an account purchases something (cargo, vending machines)
 #define ECON_LOG_EVENT_ACCOUNT_PURCHASE "ACCOUNT_PURCHASE"
+#warn remove?
 // logged when a mob purchases something (think black markets -- note that this is much harder to fully track)
 #define ECON_LOG_EVENT_PERSONAL_PURCHASE "PERSONAL_PURCHASE"
 
