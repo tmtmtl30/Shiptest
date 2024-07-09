@@ -7,12 +7,13 @@
 	var/account_id
 
 // "owner_name" is used in several spots. "owner_ref" is used purely for logging
-/datum/bank_account/New(start_balance = 0, owner_name, owner_ref, age)
+/datum/bank_account/New(start_balance = 0, owner_name, owner_ref, age = null)
 	if(add_to_accounts)
 		SSeconomy.bank_accounts += src
 	account_balance = start_balance
 	account_holder = owner_name
-	holder_age = age
+	if(age)
+		holder_age = age
 	account_id = rand(111111,999999)
 
 	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATED, list(
