@@ -790,12 +790,8 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 						return
 
 					account.adjust_money(-price_to_use, "vendor_purchase")
-					if(mining_point_vendor)
-						format_log_econ(ECON_LOG_EVENT_ACCOUNT_PURCHASE, list(
-							"ACCOUNT_REF" = REF(account),
-							"PURCHASE_TYPE" = R.product_path,
-							"PRICE" = price_to_use,
-						))
+					new /datum/econ_log_event/account_purchase(account, R.product_path, price_to_use)
+
 			if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)
 				say("Thank you for shopping with [src]!")
 				purchase_message_cooldown = world.time + 5 SECONDS
@@ -1030,11 +1026,7 @@ IF YOU MODIFY THE PRODUCTS LIST OF A MACHINE, MAKE SURE TO UPDATE ITS RESUPPLY C
 						S.forceMove(drop_location())
 						loaded_items--
 
-						format_log_econ(ECON_LOG_EVENT_ACCOUNT_PURCHASE, list(
-							"ACCOUNT_REF" = REF(account),
-							"PURCHASE_TYPE" = S.type,
-							"PRICE" = S.custom_price,
-						))
+						new /datum/econ_log_event/account_purchase(account, S.type, S.custom_price)
 
 						use_power(5)
 						if(last_shopper != REF(usr) || purchase_message_cooldown < world.time)

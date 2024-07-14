@@ -343,10 +343,7 @@
 	GLOB.joined_player_list += character.ckey
 
 	log_manifest(character.mind.key, character.mind, character, TRUE)
-	format_log_econ(ECON_LOG_EVENT_PLAYER_SHIP_SPAWN, list(
-		"CHARACTER_REF" = REF(character),
-		"SHIP_REF" = REF(ship)
-	))
+	new /datum/econ_log_event/player_ship_spawn(character, ship)
 
 	if(length(ship.job_slots) > 1 && ship.job_slots[1] == job) // if it's the "captain" equivalent job of the ship. checks to make sure it's not a one-job ship
 		minor_announce("[job.name] [character.real_name] on deck!", zlevel = ship.shuttle_port.virtual_z())

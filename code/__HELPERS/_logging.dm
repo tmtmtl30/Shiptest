@@ -112,14 +112,6 @@
 	if (CONFIG_GET(flag/log_econ))
 		WRITE_LOG(GLOB.world_attack_log, "MONEY: [text]")
 
-/// Wrapper proc for log_econ, used to keep economy logging easily parsed.
-/proc/format_log_econ(event_type, fields)
-	var/dat_list = list()
-	for(var/field in fields)
-		dat_list += "[field]: [fields[field]]"
-
-	log_econ("[event_type]; [jointext(dat_list, ", ")]")
-
 /proc/log_manifest(ckey, datum/mind/mind,mob/body, latejoin = FALSE)
 	if (CONFIG_GET(flag/log_manifest))
 		WRITE_LOG(GLOB.world_manifest_log, "[ckey] \\ [body.real_name] \\ [mind.assigned_role] \\ [mind.special_role ? mind.special_role : "NONE"] \\ [latejoin ? "LATEJOIN":"ROUNDSTART"]")

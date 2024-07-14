@@ -18,19 +18,13 @@
 	. = ..()
 	if(amount)
 		value = amount
-	format_log_econ(ECON_LOG_EVENT_MONEY_CREATED, list(
-		"REF" = REF(src),
-		"TYPE" = type,
-		"VALUE" = value,
-		"TURF" = AREACOORD(src)
-	))
+
+	new /datum/econ_log_event/money_created(src)
 	update_appearance()
 
 /obj/item/money_stack/Destroy(...)
-	format_log_econ(ECON_LOG_EVENT_MONEY_DELETED, list(
-		"REF" = REF(src),
-		"VALUE" = value
-	))
+	new /datum/econ_log_event/money_deleted(src)
+
 	// on the off chance somebody manages to interact with this after it gets qdeleted...
 	value = 0
 	return ..()
@@ -73,19 +67,13 @@
 	if(amount != round(amount) || (amount < 0 && value < (-amount)))
 		return FALSE
 	value += amount
+	if(log)
+		new /datum/econ_log_event/money_altered(src)
+
 	if(value > 0)
 		update_appearance()
 	else
 		qdel(src)
-
-	if(log)
-		format_log_econ(ECON_LOG_EVENT_MONEY_ALTERED, list(
-			"REF" = REF(src),
-			"TYPE" = type,
-			"AMT" = amount,
-			"FINAL_VALUE" = value
-		))
-
 	return TRUE
 
 /// Merges the passed money stack S into src, so long as it is a subtype of src.merge_split_type.
@@ -96,17 +84,10 @@
 		to_chat(user, "<span class='warning'>[S] cannot be merged into [src].</span>")
 		return FALSE
 
-	format_log_econ(ECON_LOG_EVENT_MONEY_MERGED, list(
-		"FINAL_REF" = REF(src),
-		"FINAL_TYPE" = type,
-		"SOURCE_REF" = REF(S),
-		"SOURCE_TYPE" = S.type,
-		"TRANSFER_AMT" = S.value,
-		"NEW_FINAL_VALUE" = value + S.value,
-	))
-
 	alter_value(S.value, log = FALSE)
 	to_chat(user, "<span class='notice'>You add [S.value] credits worth of money to [src].<br>It now holds [value] credits.</span>")
+
+	new /datum/econ_log_event/money_merged(src, S)
 
 	qdel(S)
 	return TRUE
@@ -120,17 +101,9 @@
 		return FALSE
 
 	var/obj/item/money_stack/new_stack = new merge_split_type(stack_loc, amount)
-
-	format_log_econ(ECON_LOG_EVENT_MONEY_SPLIT, list(
-		"SOURCE_REF" = REF(src),
-		"SOURCE_TYPE" = type,
-		"DEST_REF" = REF(new_stack),
-		"DEST_TYPE" = new_stack.type,
-		"TRANSFER_AMT" = amount,
-		"NEW_SOURCE_VALUE" = value - amount,
-	))
-
 	alter_value(-amount, log = FALSE)
+
+	new /datum/econ_log_event/money_split(src, new_stack)
 	return new_stack
 
 /// Wrapper around split_into(), used for interactions.

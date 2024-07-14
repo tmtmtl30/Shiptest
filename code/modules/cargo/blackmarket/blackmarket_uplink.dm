@@ -32,13 +32,8 @@
 			to_chat(user, "<span class='warning'>[I] doesn't seem to be worth anything!</span>")
 		money += worth
 		to_chat(user, "<span class='notice'>You slot [I] into [src] and it reports a total of [money] credits inserted.</span>")
-		format_log_econ(ECON_LOG_EVENT_PERSONAL_INSERT, list(
-			"MOB" = REF(user),
-			"TARGET" = REF(src),
-			"TARGET_TYPE" = type,
-			"ITEM" = REF(I),
-			"VALUE" = worth
-		))
+		new /datum/econ_log_event/personal_insert(user, src, I)
+
 		qdel(I)
 		return
 	. = ..()
@@ -59,15 +54,9 @@
 
 	var/obj/item/money_stack/holochip/holochip = new (user.drop_location(), amount_to_remove)
 	money -= amount_to_remove
-	holochip.name = "washed " + holochip.name // call it washed all you want, this money is still logged!
-	format_log_econ(ECON_LOG_EVENT_PERSONAL_WITHDRAW, list(
-		"MOB" = REF(user),
-		"TARGET" = REF(src),
-		"TARGET_TYPE" = type,
-		"ITEM" = REF(holochip),
-		"ITEM_TYPE" = holochip.type,
-		"VALUE" = amount_to_remove
-	))
+	holochip.name = "washed " + holochip.name
+	// call it washed all you want, this money is still logged!
+	new /datum/econ_log_event/personal_withdraw(user, src, holochip)
 
 	user.put_in_hands(holochip)
 	to_chat(user, "<span class='notice'>You withdraw [amount_to_remove] credits into a holochip.</span>")

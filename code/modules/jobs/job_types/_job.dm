@@ -122,7 +122,7 @@
 	if(!H)
 		return FALSE
 	if(!visualsOnly)
-		var/datum/bank_account/bank_account = new(officer ? 250 : 100, H.real_name, REF(H), age = H.age)
+		var/datum/bank_account/bank_account = new(officer ? 250 : 100, H)
 		H.account_id = bank_account.account_id
 
 	//Equip the rest of the gear

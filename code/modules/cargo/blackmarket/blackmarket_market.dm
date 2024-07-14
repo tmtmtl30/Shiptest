@@ -47,13 +47,8 @@
 
 		if(I.buy(uplink, user, method))
 			uplink.money -= price
-			format_log_econ(ECON_LOG_EVENT_PERSONAL_PURCHASE, list(
-				"MOB" = REF(user),
-				"TARGET" = REF(uplink),
-				"TARGET_TYPE" = uplink.type,
-				"PURCHASE_TYPE" = I.item,
-				"PRICE" = price
-			))
+			// gotta log it. we don't push this down to I.buy() because we want to include the cost of shipping
+			new /datum/econ_log_event/personal_purchase(user, uplink, I.item, price)
 			return TRUE
 		return FALSE
 

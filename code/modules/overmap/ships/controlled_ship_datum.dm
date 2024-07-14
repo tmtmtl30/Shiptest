@@ -109,7 +109,7 @@
 				Dock(position, TRUE)
 
 			refresh_engines()
-		ship_account = new(source_template.starting_funds, name, REF(src))
+		ship_account = new(source_template.starting_funds, src)
 
 #ifdef UNIT_TESTS
 	Rename("[source_template]", TRUE)

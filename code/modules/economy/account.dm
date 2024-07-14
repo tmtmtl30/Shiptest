@@ -1,29 +1,28 @@
 /datum/bank_account
-	var/account_holder = "Rusty Venture"
-	var/account_balance = 0
-	var/holder_age = 18
-	var/list/bank_cards = list()
-	var/add_to_accounts = TRUE
 	var/account_id
+	var/account_balance = 0
+	var/account_holder = "Rusty Venture"
+	var/holder_age
+
+	var/add_to_accounts = TRUE
+	var/list/bank_cards = list()
 
 // "owner_name" is used in several spots. "owner_ref" is used purely for logging
-/datum/bank_account/New(start_balance = 0, owner_name, owner_ref, age = null)
+/datum/bank_account/New(start_balance = 0, owner)
+	account_id = rand(111111,999999)
+	account_balance = start_balance
 	if(add_to_accounts)
 		SSeconomy.bank_accounts += src
-	account_balance = start_balance
-	account_holder = owner_name
-	if(age)
-		holder_age = age
-	account_id = rand(111111,999999)
 
-	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATED, list(
-		"ACCOUNT_ID" = account_id,
-		"REF" = REF(src),
-		"TYPE" = type,
-		"TOTAL" = account_balance,
-		"HOLDER_REF" = owner_ref,
-		"HOLDER_NAME" = account_holder,
-	))
+	// we do a fake cast to /atom to get the .name var on our owner
+	var/atom/fake_owner_atom_cast = owner
+	account_holder = fake_owner_atom_cast.name
+	if(ishuman(owner))
+		// and then a real cast to /human to get their age
+		var/mob/living/carbon/human/H = owner
+		holder_age = H.age
+
+	new /datum/econ_log_event/account_created(src, owner)
 
 /datum/bank_account/Destroy()
 	if(add_to_accounts)
@@ -32,6 +31,7 @@
 		bank_card.registered_account = null
 	return ..()
 
+#warn check money for more restrictive restrictions on transfers. might be for the best
 /// Returns whether the account has greater than or equal to the passed amount of credits.
 /datum/bank_account/proc/has_money(amt)
 	return account_balance >= amt
@@ -50,12 +50,8 @@
 /datum/bank_account/proc/adjust_money(amt, source)
 	if((amt < 0 && has_money(-amt)) || amt > 0)
 		_adjust_money(amt)
-		format_log_econ(ECON_LOG_EVENT_ACCOUNT_UPDATED, list(
-			"REF" = REF(src),
-			"AMOUNT" = amt,
-			"NEW_TOTAL" = account_balance,
-			"SOURCE" = source
-		))
+
+		new /datum/econ_log_event/account_updated(src, source)
 		return TRUE
 	return FALSE
 
@@ -66,14 +62,7 @@
 		_adjust_money(amount)
 		from._adjust_money(-amount)
 
-		format_log_econ(ECON_LOG_EVENT_ACCOUNT_TRANSFER, list(
-			"AMOUNT" = amount,
-			"TO_REF" = REF(src),
-			"NEW_TOTAL_TO" = src.account_balance,
-			"FROM_REF" = REF(from),
-			"NEW_TOTAL_FROM" = from.account_balance,
-			"SOURCE" = source
-		))
+		new /datum/econ_log_event/account_transfer(src, from, source)
 		return TRUE
 	return FALSE
 
@@ -86,13 +75,7 @@
 		return FALSE
 
 	_adjust_money(item_value)
-	format_log_econ(ECON_LOG_EVENT_ACCOUNT_ABSORB, list(
-		"ACCOUNT_REF" = REF(src),
-		"ITEM_REF" = REF(money_item),
-		"ITEM_TYPE" = money_item.type,
-		"AMOUNT" = item_value,
-		"NEW_TOTAL" = account_balance,
-	))
+	new /datum/econ_log_event/account_absorb(src, money_item)
 
 	if(qdel_after)
 		qdel(money_item)
@@ -107,12 +90,7 @@
 	_adjust_money(-amount)
 
 	var/obj/item/money_stack/holochip/holochip = new(location, amount)
-	format_log_econ(ECON_LOG_EVENT_ACCOUNT_CREATECHIP, list(
-		"ACCOUNT_REF" = REF(src),
-		"ITEM_REF" = REF(holochip),
-		"AMOUNT" = amount,
-		"NEW_TOTAL" = account_balance
-	))
+	new /datum/econ_log_event/account_createchip(src, holochip)
 	return holochip
 
 /datum/bank_account/proc/bank_card_talk(message, force)

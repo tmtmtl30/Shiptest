@@ -243,11 +243,8 @@
 				var/datum/supply_order/SO = new(pack, name, rank, usr.ckey, "")
 				new /obj/effect/pod_landingzone(landing_turf, podType, SO)
 
-				format_log_econ(ECON_LOG_EVENT_ACCOUNT_PURCHASE, list(
-					"ACCOUNT_REF" = REF(charge_account),
-					"PURCHASE_TYPE" = pack.type,
-					"PRICE" = pack.cost
-				))
+				// logging
+				new /datum/econ_log_event/account_purchase(charge_account, pack.type, pack.cost)
 
 				update_appearance() // ??????????????????
 				return TRUE

@@ -238,13 +238,8 @@
 	if(val)
 		credits += val
 		to_chat(user, "<span class='notice'>You deposit [I], for a total of [credits] credits.</span>")
-		format_log_econ(ECON_LOG_EVENT_PERSONAL_INSERT, list(
-			"MOB" = REF(user),
-			"TARGET" = REF(src),
-			"TARGET_TYPE" = type,
-			"ITEM" = REF(I),
-			"VALUE" = val
-		))
+		new /datum/econ_log_event/personal_insert(user, src, I)
+
 		qdel(I)
 		return
 	if(istype(I, /obj/item/merit/bundle))
@@ -268,17 +263,11 @@
 		makenoise = TRUE
 	if(credits)
 		var/obj/item/money_stack/cash/made_cash = new(drop_location(), credits)
-		// we don't log ECON_LOG_EVENT_PERSONAL_PURCHASE for merit conversion, because
+		// we don't use /datum/econ_log_event/personal_purchase for merit conversion, because
 		// doing so might lead to double-counts (merits -> cash -> merits -> cash).
 		// we're chiefly concerned with money here, not hydrogen, so it's not a big deal
-		format_log_econ(ECON_LOG_EVENT_PERSONAL_WITHDRAW, list(
-			"MOB" = REF(user),
-			"TARGET" = REF(src),
-			"TARGET_TYPE" = type,
-			"ITEM" = REF(made_cash),
-			"ITEM_TYPE" = made_cash.type,
-			"VALUE" = credits
-		))
+		new /datum/econ_log_event/personal_withdraw(user, src, made_cash)
+
 		credits = 0
 		makenoise = TRUE
 	if(makenoise)

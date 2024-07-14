@@ -15,6 +15,8 @@
 
 #define NO_FREEBIES "commies go home"
 
+#warn REMOVE
+/*
 // Logged when a player spawns onto a ship, so that per-ship finances can be tracked.
 #define ECON_LOG_EVENT_PLAYER_SHIP_SPAWN "PLAYER_SHIP_SPAWN"
 
@@ -54,4 +56,4 @@
 #define ECON_LOG_EVENT_PERSONAL_WITHDRAW "PERSONAL_WITHDRAW"
 // logged when a mob purchases something from an object using money, but without going through their account
 #define ECON_LOG_EVENT_PERSONAL_PURCHASE "PERSONAL_PURCHASE"
-
+*/
