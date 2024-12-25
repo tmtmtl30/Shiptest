@@ -113,7 +113,7 @@
 		GLOB.no_dependency_prefs += src
 
 #warn note that all these procs which take dependency_data (as code currently stands) may be passed "null" instead of a list if they have no dependencies.
-#warn this should be coded around, and heavily documented (as should the idea of a "pref data list")
+#warn this should be coded around, and heavily documented (as should the idea of a "pref value list")
 
 
 // ! a preference becoming unavailable needs to trigger a character update, as there might be leftover data.

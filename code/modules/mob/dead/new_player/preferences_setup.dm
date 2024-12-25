@@ -1,8 +1,8 @@
 #warn randomization. be careful. all procs in this file should eventually be removed
 	//The mob should have a gender you want before running this proc. Will run fine without H
 /datum/preferences/proc/random_character(gender_override, antag_override = FALSE)
-	if(randomise[RANDOM_SPECIES])
-		random_species()
+	// if(randomise[RANDOM_SPECIES])
+	// 	random_species()
 	// else if(randomise[RANDOM_NAME])
 	// 	var/datum/species/chosen_species = get_pref_data(/datum/preference/species)
 	// 	real_name = chosen_species.random_name(gender,1)
@@ -47,7 +47,7 @@
 	// if(!pref_species)
 	// 	var/rando_race = pick(GLOB.roundstart_races)
 	// 	pref_species = new rando_race()
-	features = random_features()
+	// features = random_features()
 
 /datum/preferences/proc/random_species()
 	// var/random_species_type = GLOB.species_list[pick(GLOB.roundstart_races)]

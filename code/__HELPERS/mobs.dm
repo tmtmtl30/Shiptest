@@ -25,7 +25,7 @@
 
 		FEATURE_MUTANT_COLOR = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),
 		FEATURE_MUTANT_COLOR2 = pick("FFFFFF","7F7F7F", "7FFF7F", "7F7FFF", "FF7F7F", "7FFFFF", "FF7FFF", "FFFF7F"),
-		FEATURE_IPC_BRAIN = pick(GLOB.ipc_brain_list),
+		// FEATURE_IPC_BRAIN = pick(GLOB.ipc_brain_list),
 		FEATURE_IPC_CHASSIS = pick(GLOB.ipc_chassis_list),
 		FEATURE_BODY_SIZE = pick(GLOB.body_sizes),
 
